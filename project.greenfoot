@@ -2,12 +2,15 @@
 dependency1.from=levelOne
 dependency1.to=Player
 dependency1.type=UsesDependency
+dependency2.from=titleScreen
+dependency2.to=levelOne
+dependency2.type=UsesDependency
 editor.fx.0.height=737
 editor.fx.0.width=814
 editor.fx.0.x=360
 editor.fx.0.y=28
 height=838
-package.numDependencies=1
+package.numDependencies=2
 package.numTargets=3
 project.charset=windows-1252
 publish.hasSource=false
