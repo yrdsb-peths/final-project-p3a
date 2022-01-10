@@ -16,9 +16,9 @@ public class levelOne extends World
     public levelOne()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(512*2, 288*2, 1); 
-        GreenfootImage bg = new GreenfootImage("TiledMap.png");
-        //bg.scale(512*2, 288*2);
+        super((int)Math.round(512*2.5), (int)Math.round(288*2.5), 1); 
+        GreenfootImage bg = new GreenfootImage("TiledMap (2).png");
+        bg.scale((int)Math.round(512*2.5), (int)Math.round(288*2.5));
         setBackground(bg);
         Player player = new Player();
         addObject(player, 100, 100);
