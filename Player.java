@@ -17,11 +17,13 @@ public class Player extends Actor
     private int x;
     private int y;
     private int floor = 200;
+    private double amountJumped;
     private double tempHoriSpeed;
     private boolean wPressed;
     private boolean aPressed;
     private boolean dPressed;
     private boolean isFalling = false;
+    private boolean isJumping = false;
     public Player(){
         setImage("trainer(initial).png");
     }
@@ -74,11 +76,23 @@ public class Player extends Actor
         }
         
         if(wPressed == true){
-            if(isFalling == false){
-                y -= JUMP_HEIGHT;
-                isFalling = true;
-                amountFallen = 0;
+            if (isJumping == false){
+                amountJumped = 0;
+                isJumping = true;
+            } else if (isFalling == false){
+                if (amountJumped >= JUMP_HEIGHT){
+                    isFalling = true;
+                    amountFallen = 0;
+                    amountJumped = 0;
+                } else {
+                    y -= 10;
+                    amountJumped += 10;
+                }
             }
+        } else if (wPressed == false && isJumping == true && isFalling == false){
+            isFalling = true;
+            amountFallen = 0;
+            amountJumped = 0;
         }
         if(aPressed == true || dPressed == true){
             leftRight(aPressed, dPressed);
@@ -90,6 +104,7 @@ public class Player extends Actor
         }
         move(x,y);
         if (getY() >= floor && isFalling == true){
+            isJumping = false;
             isFalling = false;
         }
     }
