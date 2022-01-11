@@ -24,17 +24,18 @@ public class Player extends Actor
     private boolean dPressed;
     private boolean isFalling = false;
     private boolean isJumping = false;
+    private char lastMoveState;
     public Player(){
-        setImage("trainer(initial).png");
+        setImage("adventurer-idle-00.png");
     }
     /**
      * Act - do whatever the Player wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    public void move(int x,int y){
+    private void move(int x,int y){
         setLocation(getX()+x, getY()+y);
     }
-    public void leftRight(boolean aPressed, boolean dPressed){
+    private void leftRight(boolean aPressed, boolean dPressed){
         if (tempHoriSpeed <= maxHoriVelocity){
             tempHoriSpeed += 0.1;
         }
@@ -49,16 +50,17 @@ public class Player extends Actor
             }
         }
     }
-    public void fall(){
+    private void fall(){
         if ((amountFallen += GRAVITY) != MAX_VERT_VELOCITY){
             amountFallen = (amountFallen + GRAVITY);
         }
         y += amountFallen;
     }
-    public void movement()
+    private void movement()
     {
         x= 0;
         y= 0;
+        animationState();
         if(Greenfoot.isKeyDown("w")){
             wPressed = true;
         } else {
@@ -106,6 +108,54 @@ public class Player extends Actor
         if (getY() >= floor && isFalling == true){
             isJumping = false;
             isFalling = false;
+        }
+    }
+    // To do: Fix fall state, add dynamic animations
+    // Possibly resize image slightly?
+    private void animationState()
+    {
+        // Check state left, right
+        if (Greenfoot.isKeyDown("d"))
+        {
+            //state right
+            lastMoveState = 'R';
+            setImage("adventurer-run-01.png");
+        }
+        else if (Greenfoot.isKeyDown("a"))
+        {
+            //state left
+            lastMoveState = 'L';
+            setImage("adventurer-run-01(L).png");
+        }
+        else if (isJumping)
+        {
+            switch(lastMoveState)
+            {
+                case 'R': setImage("adventurer-jump-02.png");
+                    break;
+                case 'L': setImage("adventurer-jump-02(L).png");
+                    break;
+            }
+        }
+        else if (isFalling)
+        {
+            switch(lastMoveState)
+            {
+                case 'R': setImage("adventurer-fall-00.png");
+                    break;
+                case 'L': setImage("adventurer-fall-00(L).png");
+                    break;
+            }
+        }
+        else
+        {
+            switch(lastMoveState)
+            {
+                case 'R': setImage("adventurer-idle-00.png");
+                    break;
+                case 'L': setImage("adventurer-idle-00(L).png");
+                    break;
+            }
         }
     }
     public void act(){
