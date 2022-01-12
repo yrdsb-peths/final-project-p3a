@@ -1,9 +1,9 @@
 #BlueJ class context
-comment0.target=titleScreen
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ MyWorld\ here.\r\n\ \r\n\ @author\ Isaac,\ Kenneth\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.target=TitleScreen
+comment0.text=\n\ Write\ a\ description\ of\ class\ MyWorld\ here.\n\ \n\ @author\ Isaac,\ Kenneth\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
 comment1.params=
-comment1.target=titleScreen()
-comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ MyWorld.\r\n\ \r\n
+comment1.target=TitleScreen()
+comment1.text=\n\ Constructor\ for\ objects\ of\ class\ MyWorld.\n\ \n
 comment2.params=
 comment2.target=void\ act()
 numComments=3

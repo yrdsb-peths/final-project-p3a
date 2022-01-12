@@ -1,4 +1,6 @@
 #BlueJ class context
-comment0.target=mapGrid
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ mapGrid\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
-numComments=1
+comment0.target=MapGrid
+comment0.text=\n\ Write\ a\ description\ of\ class\ mapGrid\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=
+comment1.target=void\ createMap()
+numComments=2

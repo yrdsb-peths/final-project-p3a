@@ -6,14 +6,14 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author Isaac, Kenneth 
  * @version (a version number or a date)
  */
-public class titleScreen extends World
+public class TitleScreen extends World
 {
 
     /**
      * Constructor for objects of class MyWorld.
      * 
      */
-    public titleScreen()
+    public TitleScreen()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(600, 400, 1); 
@@ -21,7 +21,9 @@ public class titleScreen extends World
     }
     public void act(){
         if ("space".equals(Greenfoot.getKey())){
-            levelOne curWorld = new levelOne();
+            LevelOne curWorld = new LevelOne();
+             
+            
             Greenfoot.setWorld(curWorld);
         }
     }
