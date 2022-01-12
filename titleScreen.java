@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class titleScreen extends World
 {
-
+    
     /**
      * Constructor for objects of class MyWorld.
      * 
@@ -22,7 +22,7 @@ public class titleScreen extends World
     public void act(){
         if ("space".equals(Greenfoot.getKey())){
             levelOne curWorld = new levelOne();
-            Greenfoot.setWorld(curWorld);
+            Greenfoot.setWorld(curWorld); 
         }
     }
 }
