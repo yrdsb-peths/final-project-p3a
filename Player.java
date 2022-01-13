@@ -110,7 +110,6 @@ public class Player extends Actor
     {
         x= 0;
         y= 0;
-        animationState();
         if(Greenfoot.isKeyDown("w")){
             wPressed = true;
         } else {
@@ -231,6 +230,7 @@ public class Player extends Actor
                 frame = (frame + 1) % idle[0].length;
                 setImage(idle[frameDir][frame]);
                 lastMove = "idle";
+                lastFrameDir = frameDir;
             }
         }
         if (frameInterval >= 100){frameInterval = 0;}
@@ -244,6 +244,7 @@ public class Player extends Actor
         frameDir = newDir;
     }
     public void act(){
+        animationState();
         movement();
     }
 }
