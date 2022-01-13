@@ -32,6 +32,7 @@ public class Player extends Actor
     int frameInterval = 0; // Time waited for animation
     int frameDelay = 15; // Time to wait for next animation
     boolean ignoreCD = false; // Ignore animation cooldown
+    boolean forceIdle = false;
     String lastMove = "none";
     GreenfootImage[][] idle = new GreenfootImage[2][4];
     GreenfootImage[][] walk = new GreenfootImage[2][6];
@@ -171,6 +172,10 @@ public class Player extends Actor
             {
                 ignoreCD = true;
             }
+            else
+            {
+                forceIdle = true;
+            }
         }
         if(isFalling)
         {
@@ -200,7 +205,7 @@ public class Player extends Actor
                 lastMove = "jump";
             }
         }
-        else if(dPressed || aPressed)
+        else if((dPressed || aPressed) && !forceIdle)
         {
             if (!lastMove.equals("walk"))
             {
@@ -231,6 +236,7 @@ public class Player extends Actor
         if (frameInterval >= 100){frameInterval = 0;}
         frameInterval++;
         ignoreCD = false;
+        forceIdle = false;
     }
     private void changeFrameDir(int newDir)
     {
