@@ -8,25 +8,75 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Player extends Actor
 {
-    private double GRAVITY = 0.1;
-    private int MAX_VERT_VELOCITY = 50;
-    private int JUMP_HEIGHT = 100;
-    private double amountFallen = 0;
-    private int maxHoriVelocity = 8;
-    private int horiSpeed = 2; //possible to change to make player move faster, possible powerup
-    private int x;
-    private int y;
-    private int floor = 200;
-    private double amountJumped;
-    private double tempHoriSpeed;
-    private boolean wPressed;
-    private boolean aPressed;
-    private boolean dPressed;
-    private boolean isFalling = false;
-    private boolean isJumping = false;
-    private char lastMoveState;
-    public Player(){
-        setImage("adventurer-idle-00.png");
+    double GRAVITY = 0.1;
+    int MAX_VERT_VELOCITY = 25;
+    int JUMP_HEIGHT = 100;
+    double amountFallen = 0;
+    int maxHoriVelocity = 2;
+    int horiSpeed = 1; //possible to change to make player move faster, possible powerup
+    int x;
+    int y;
+    int floor = 200;
+    double amountJumped;
+    double tempHoriSpeed;
+    boolean wPressed;
+    boolean aPressed;
+    boolean dPressed;
+    boolean isFalling = false;
+    boolean isJumping = false;
+    char lastMoveState;
+    // Animation arrays probably could be simplified further
+    int frame = 0; // Current animation frame
+    int frameDir = 0; // Direction of animation, right = 0, left = 1
+    int lastFrameDir = 0; // Direction of last animation played
+    int frameInterval = 0; // Time waited for animation
+    int frameDelay = 15; // Time to wait for next animation
+    boolean ignoreCD = false; // Ignore animation cooldown
+    boolean forceIdle = false;
+    String lastMove = "none";
+    GreenfootImage[][] idle = new GreenfootImage[2][4];
+    GreenfootImage[][] walk = new GreenfootImage[2][6];
+    GreenfootImage[][] jump = new GreenfootImage[2][2];
+    GreenfootImage[][] fall = new GreenfootImage[2][2];
+    public Player()
+    {
+        // Idles left and right:
+        for(int i = 0; i <= 1; i++) // Right = 0, Left = 1
+        {
+           for(int j = 0; j <= 3; j++) // 4 idle states
+            {
+                idle[i][j] = new GreenfootImage("PCAnim/adventurer-idle-0" + j + "-" + i + ".png");
+                idle[i][j].scale((int)(24*1.6), (int)(30*1.6));
+            }
+        }
+        // Walk left and right:
+        for(int i = 0; i <= 1; i++)
+        {
+            for(int j = 0; j <= 5; j++)
+            {
+                walk[i][j] = new GreenfootImage("PCAnim/adventurer-run-0" + j + "-" + i + ".png");
+                walk[i][j].scale((int)(24*1.6), (int)(30*1.6));
+            }
+        }
+        // Jump left and right:
+        for(int i = 0; i <= 1; i++)
+        {
+            for(int j = 0; j <= 1; j++)
+            {
+                jump[i][j] = new GreenfootImage("PCAnim/adventurer-jump-0" + j + "-" + i + ".png");
+                jump[i][j].scale((int)(24*1.6), (int)(30*1.6));
+            }
+        }
+        // Fall left and right:
+        for(int i = 0; i <= 1; i++)
+        {
+            for(int j = 0; j <= 1; j++)
+            {
+                fall[i][j] = new GreenfootImage("PCAnim/adventurer-fall-0" + j + "-" + i + ".png");
+                fall[i][j].scale((int)(24*1.6), (int)(30*1.6));
+            }
+        }
+        setImage(idle[0][0]);
     }
     /**
      * Act - do whatever the Player wants to do. This method is called whenever
@@ -60,7 +110,6 @@ public class Player extends Actor
     {
         x= 0;
         y= 0;
-        animationState();
         if(Greenfoot.isKeyDown("w")){
             wPressed = true;
         } else {
@@ -68,11 +117,13 @@ public class Player extends Actor
         }
         if(Greenfoot.isKeyDown("a")){
             aPressed = true;
+            changeFrameDir(1);
         } else {
             aPressed = false;
         }
         if(Greenfoot.isKeyDown("d")){
             dPressed = true;
+            changeFrameDir(0);
         } else {
             dPressed = false;
         }
@@ -110,55 +161,90 @@ public class Player extends Actor
             isFalling = false;
         }
     }
-    // To do: Fix fall state, add dynamic animations
-    // Possibly resize image slightly?
+    // To do: Animation speed, force animation change on movement change
+    // Refine code
     private void animationState()
     {
-        // Check state left, right
-        if (Greenfoot.isKeyDown("d"))
+        if(lastFrameDir != frameDir)
         {
-            //state right
-            lastMoveState = 'R';
-            setImage("adventurer-run-01.png");
-        }
-        else if (Greenfoot.isKeyDown("a"))
-        {
-            //state left
-            lastMoveState = 'L';
-            setImage("adventurer-run-01(L).png");
-        }
-        else if (isJumping)
-        {
-            switch(lastMoveState)
+            if (!(aPressed && dPressed))
             {
-                case 'R': setImage("adventurer-jump-02.png");
-                    break;
-                case 'L': setImage("adventurer-jump-02(L).png");
-                    break;
+                ignoreCD = true;
+            }
+            else
+            {
+                forceIdle = true;
             }
         }
-        else if (isFalling)
+        if(isFalling)
         {
-            switch(lastMoveState)
+            if (!lastMove.equals("fall"))
             {
-                case 'R': setImage("adventurer-fall-00.png");
-                    break;
-                case 'L': setImage("adventurer-fall-00(L).png");
-                    break;
+                frame = 0;
+                ignoreCD = true;
+            }
+            if (frameInterval % frameDelay == 0 || ignoreCD)
+            {
+                frame = (frame + 1) % fall[0].length;
+                setImage(fall[frameDir][frame]);
+                lastMove = "fall";
+            }
+        }
+        else if(isJumping)
+        {
+            if (!lastMove.equals("jump"))
+            {
+                frame = 0;
+                ignoreCD = true;
+            }
+            if (frameInterval % frameDelay == 0 || ignoreCD)
+            {
+                frame = (frame + 1) % jump[0].length;
+                setImage(jump[frameDir][frame]);
+                lastMove = "jump";
+            }
+        }
+        else if((dPressed || aPressed) && !forceIdle)
+        {
+            if (!lastMove.equals("walk"))
+            {
+                frame = 0;
+                ignoreCD = true;
+            }
+            if (frameInterval % frameDelay == 0 || ignoreCD)
+            {
+                frame = (frame + 1) % walk[0].length;
+                setImage(walk[frameDir][frame]);
+                lastMove = "walk";
             }
         }
         else
         {
-            switch(lastMoveState)
+            if (!lastMove.equals("idle"))
             {
-                case 'R': setImage("adventurer-idle-00.png");
-                    break;
-                case 'L': setImage("adventurer-idle-00(L).png");
-                    break;
+                frame = 0;
+                ignoreCD = true;
+            }
+            if (frameInterval % frameDelay == 0 || ignoreCD)
+            {
+                frame = (frame + 1) % idle[0].length;
+                setImage(idle[frameDir][frame]);
+                lastMove = "idle";
+                lastFrameDir = frameDir;
             }
         }
+        if (frameInterval >= 100){frameInterval = 0;}
+        frameInterval++;
+        ignoreCD = false;
+        forceIdle = false;
+    }
+    private void changeFrameDir(int newDir)
+    {
+        lastFrameDir = frameDir;
+        frameDir = newDir;
     }
     public void act(){
+        animationState();
         movement();
     }
 }
