@@ -8,36 +8,36 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Player extends Actor
 {
-    double GRAVITY = 0.1;
-    int MAX_VERT_VELOCITY = 25;
-    int JUMP_HEIGHT = 100;
-    double amountFallen = 0;
-    int maxHoriVelocity = 2;
-    int horiSpeed = 1; //possible to change to make player move faster, possible powerup
-    int x;
-    int y;
-    int floor = 200;
-    double amountJumped;
-    double tempHoriSpeed;
-    boolean wPressed;
-    boolean aPressed;
-    boolean dPressed;
-    boolean isFalling = false;
-    boolean isJumping = false;
-    char lastMoveState;
+    private double GRAVITY = 0.1;
+    private int MAX_VERT_VELOCITY = 25;
+    private int JUMP_HEIGHT = 100;
+    private double amountFallen = 0;
+    private int maxHoriVelocity = 2;
+    private int horiSpeed = 1; //possible to change to make player move faster, possible powerup
+    private int x;
+    private int y;
+    private int floor = 200;
+    private double amountJumped;
+    private double tempHoriSpeed;
+    private boolean wPressed;
+    private boolean aPressed;
+    private boolean dPressed;
+    private boolean isFalling = false;
+    private boolean isJumping = false;
+    private char lastMoveState;
     // Animation arrays probably could be simplified further
-    int frame = 0; // Current animation frame
-    int frameDir = 0; // Direction of animation, right = 0, left = 1
-    int lastFrameDir = 0; // Direction of last animation played
-    int frameInterval = 0; // Time waited for animation
-    int frameDelay = 15; // Time to wait for next animation
-    boolean ignoreCD = false; // Ignore animation cooldown
-    boolean forceIdle = false;
-    String lastMove = "none";
-    GreenfootImage[][] idle = new GreenfootImage[2][4];
-    GreenfootImage[][] walk = new GreenfootImage[2][6];
-    GreenfootImage[][] jump = new GreenfootImage[2][2];
-    GreenfootImage[][] fall = new GreenfootImage[2][2];
+    private int frame = 0; // Current animation frame
+    private int frameDir = 0; // Direction of animation, right = 0, left = 1
+    private int lastFrameDir = 0; // Direction of last animation played
+    private int frameInterval = 0; // Time waited for animation
+    private int frameDelay = 15; // Time to wait for next animation
+    private boolean ignoreCD = false; // Ignore animation cooldown
+    private boolean forceIdle = false;
+    private String lastMove = "none";
+    private GreenfootImage[][] idle = new GreenfootImage[2][4];
+    private GreenfootImage[][] walk = new GreenfootImage[2][6];
+    private GreenfootImage[][] jump = new GreenfootImage[2][2];
+    private GreenfootImage[][] fall = new GreenfootImage[2][2];
     public Player()
     {
         // Idles left and right:
@@ -127,7 +127,6 @@ public class Player extends Actor
         } else {
             dPressed = false;
         }
-        
         if(wPressed == true){
             if (isJumping == false){
                 amountJumped = 0;
