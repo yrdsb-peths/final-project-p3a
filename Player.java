@@ -82,6 +82,19 @@ public class Player extends Actor
      * Act - do whatever the Player wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    private int getTop(){
+        return getY()-25;
+    }
+    private int getBottom(){
+        return getY()+25;
+    }
+    private int getLeft(){
+        return getY()-25;
+    }
+    private int getRight(){
+        return getY()-25;
+    }
+    
     private void move(int x,int y){
         setLocation(getX()+x, getY()+y);
     }
@@ -246,5 +259,6 @@ public class Player extends Actor
     public void act(){
         animationState();
         movement();
+        
     }
 }
