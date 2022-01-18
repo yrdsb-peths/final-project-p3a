@@ -8,8 +8,12 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Player extends Actor
 {
-    private double GRAVITY = 0.1;
+    private double GRAVITY = 0.1; // gravity speed
     private int MAX_VERT_VELOCITY = 25;
+    private double jumpSpeed = 8.0; // jump speed
+    private double tempJumpSpeed = 8.0; // jump speed - decel
+    private double jumpDecel = 1.0;
+    private double jumpDecelTimer = 0;
     private int JUMP_HEIGHT = 100;
     private double amountFallen = 0;
     private int maxHoriVelocity = 2;
@@ -30,7 +34,7 @@ public class Player extends Actor
     private int frameDir = 0; // Direction of animation, right = 0, left = 1
     private int lastFrameDir = 0; // Direction of last animation played
     private int frameInterval = 0; // Time waited for animation
-    private int frameDelay = 15; // Time to wait for next animation
+    private int frameDelay = 10; // Time to wait for next animation
     private boolean ignoreCD = false; // Ignore animation cooldown
     private boolean forceIdle = false;
     private String lastMove = "none";
@@ -110,35 +114,41 @@ public class Player extends Actor
     {
         x= 0;
         y= 0;
-        if(Greenfoot.isKeyDown("w")){
+        if(Greenfoot.isKeyDown("w") && !isFalling){
             wPressed = true;
-        } else {
-            wPressed = false;
         }
         if(Greenfoot.isKeyDown("a")){
             aPressed = true;
-            changeFrameDir(1);
+            changeFrameDir(1); // now facing left
         } else {
             aPressed = false;
         }
         if(Greenfoot.isKeyDown("d")){
             dPressed = true;
-            changeFrameDir(0);
+            changeFrameDir(0); // now facing right
         } else {
             dPressed = false;
         }
-        if(wPressed == true){
-            if (isJumping == false){
+        if(wPressed){
+            if (!isJumping){
                 amountJumped = 0;
+                tempJumpSpeed = jumpSpeed;
                 isJumping = true;
-            } else if (isFalling == false){
-                if (amountJumped >= JUMP_HEIGHT){
+            } else if (!isFalling){
+                if (tempJumpSpeed == 0){
                     isFalling = true;
                     amountFallen = 0;
                     amountJumped = 0;
+                    wPressed = false;
+                    jumpDecelTimer = 0;
                 } else {
-                    y -= 10;
-                    amountJumped += 10;
+                    y -= tempJumpSpeed;
+                    amountJumped += tempJumpSpeed;
+                    if (jumpDecelTimer % 2 == 0)
+                    {
+                        tempJumpSpeed -= jumpDecel;
+                    }
+                    jumpDecelTimer += 1;
                 }
             }
         } else if (wPressed == false && isJumping == true && isFalling == false){
@@ -160,7 +170,6 @@ public class Player extends Actor
             isFalling = false;
         }
     }
-    // To do: Animation speed, force animation change on movement change
     // Refine code
     private void animationState()
     {
