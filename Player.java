@@ -12,7 +12,7 @@ public class Player extends Actor
     private int MAX_VERT_VELOCITY = 25;
     private double jumpSpeed = 8.0; // jump speed
     private double tempJumpSpeed = 8.0; // jump speed - decel
-    private double jumpDecel = 1.0;
+    private double jumpDecel = 0.75;
     private double jumpDecelTimer = 0;
     private int JUMP_HEIGHT = 100;
     private double amountFallen = 0;
@@ -135,7 +135,7 @@ public class Player extends Actor
                 tempJumpSpeed = jumpSpeed;
                 isJumping = true;
             } else if (!isFalling){
-                if (tempJumpSpeed == 0){
+                if (tempJumpSpeed <= 0){
                     isFalling = true;
                     amountFallen = 0;
                     amountJumped = 0;
