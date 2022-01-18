@@ -16,7 +16,7 @@ public class Player extends Actor
     int horiSpeed = 1; //possible to change to make player move faster, possible powerup
     int x;
     int y;
-    int floor = 200;
+
     double amountJumped;
     double tempHoriSpeed;
     boolean wPressed;
@@ -82,18 +82,6 @@ public class Player extends Actor
      * Act - do whatever the Player wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    private int getTop(){
-        return getY()-25;
-    }
-    private int getBottom(){
-        return getY()+25;
-    }
-    private int getLeft(){
-        return getY()-25;
-    }
-    private int getRight(){
-        return getY()-25;
-    }
     
     private void move(int x,int y){
         setLocation(getX()+x, getY()+y);
@@ -106,10 +94,18 @@ public class Player extends Actor
             tempHoriSpeed = horiSpeed;
         } else {
             if(aPressed == true){
-                x -= tempHoriSpeed;
+                if(isTouching(ImpassableBoxRightSide.class)){
+                    
+                } else {
+                    x -= tempHoriSpeed;
+                }
             }
             if(dPressed == true){
-                x += tempHoriSpeed;
+                if(isTouching(ImpassableBoxLeftSide.class)){
+                    
+                } else {
+                    x += tempHoriSpeed;
+                }
             }
         }
     }
@@ -142,15 +138,19 @@ public class Player extends Actor
         }
         
         if(wPressed == true){
-            if (isJumping == false){
+            if (isJumping == false && isFalling == false){
                 amountJumped = 0;
                 isJumping = true;
             } else if (isFalling == false){
                 if (amountJumped >= JUMP_HEIGHT){
                     isFalling = true;
+                    isJumping = false;
                     amountFallen = 0;
                     amountJumped = 0;
                 } else {
+                    if (isTouching(ImpassableBoxCieling.class)){
+                        amountJumped = JUMP_HEIGHT;
+                    }
                     y -= 10;
                     amountJumped += 10;
                 }
@@ -165,11 +165,18 @@ public class Player extends Actor
         }else{
             tempHoriSpeed = horiSpeed;
         }
+        if (isTouching(ImpassableBoxFloor.class) && (isTouching(ImpassableBoxLeftSide.class) || isTouching(ImpassableBoxRightSide.class))){
+            y-= 1;
+        }
+        if (!(isTouching(ImpassableBoxFloor.class)) && isJumping == false && !(isTouching(ImpassableBoxLeftSide.class) || isTouching(ImpassableBoxRightSide.class))){
+            isFalling = true;
+        }
         if (isFalling == true){
             fall();
         }
         move(x,y);
-        if (getY() >= floor && isFalling == true){
+        if (isTouching(ImpassableBoxFloor.class) && isFalling == true){
+            
             isJumping = false;
             isFalling = false;
         }
