@@ -153,14 +153,15 @@ public class Player extends Actor
                 } else {
                     y -= tempJumpSpeed;
                     amountJumped += tempJumpSpeed;
-                    if (jumpDecelTimer % 2 == 0)
+                    if (isTouching(ImpassableBoxCeiling.class))
+                    {
+                        tempJumpSpeed = 0;
+                    }
+                    else if (jumpDecelTimer % 2 == 0)
                     {
                         tempJumpSpeed -= jumpDecel;
                     }
                     jumpDecelTimer += 1;
-                    if (isTouching(ImpassableBoxCeiling.class)){
-                        amountJumped = JUMP_HEIGHT;
-                    }
                 }
             }
         } else if (wPressed == false && isJumping == true && isFalling == false){
