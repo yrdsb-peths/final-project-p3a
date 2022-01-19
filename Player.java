@@ -9,7 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Player extends Actor
 {
     private double GRAVITY = 0.1; // gravity speed
-    private int MAX_VERT_VELOCITY = 25;
+    private int MAX_VERT_VELOCITY = 20;
     private double jumpSpeed = 8.0; // jump speed
     private double tempJumpSpeed = 8.0; // jump speed - decel
     private double jumpDecel = 0.75;
@@ -39,7 +39,7 @@ public class Player extends Actor
     private String lastMove = "none";
     private GreenfootImage[][] idle = new GreenfootImage[2][4];
     private GreenfootImage[][] walk = new GreenfootImage[2][6];
-    private GreenfootImage[][] jump = new GreenfootImage[2][2];
+    private GreenfootImage[][] jump = new GreenfootImage[2][4];
     private GreenfootImage[][] fall = new GreenfootImage[2][2];
     public Player()
     {
@@ -64,7 +64,7 @@ public class Player extends Actor
         // Jump left and right:
         for(int i = 0; i <= 1; i++)
         {
-            for(int j = 0; j <= 1; j++)
+            for(int j = 0; j <= 3; j++)
             {
                 jump[i][j] = new GreenfootImage("PCAnim/adventurer-jump-0" + j + "-" + i + ".png");
                 jump[i][j].scale((int)(24*1.6), (int)(30*1.6));
