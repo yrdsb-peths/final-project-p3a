@@ -177,7 +177,8 @@ public class Player extends Actor
         if (isTouching(ImpassableBoxFloor.class) && (isTouching(ImpassableBoxLeftSide.class) || isTouching(ImpassableBoxRightSide.class))){
             y-= 1;
         }
-        if (!(isTouching(ImpassableBoxFloor.class)) && isJumping == false && !(isTouching(ImpassableBoxLeftSide.class) || isTouching(ImpassableBoxRightSide.class))){
+        if (!(isTouching(ImpassableBoxFloor.class)) && isJumping == false && !(isTouching(ImpassableBoxLeftSide.class) || isTouching(ImpassableBoxRightSide.class)) && isFalling == false){
+            amountFallen = 0;
             isFalling = true;
         }
         if (isFalling == true){
