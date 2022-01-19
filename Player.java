@@ -148,7 +148,7 @@ public class Player extends Actor
                     amountFallen = 0;
                     amountJumped = 0;
                 } else {
-                    if (isTouching(ImpassableBoxCieling.class)){
+                    if (isTouching(ImpassableBoxCeiling.class)){
                         amountJumped = JUMP_HEIGHT;
                     }
                     y -= 10;

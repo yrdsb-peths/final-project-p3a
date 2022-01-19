@@ -12,7 +12,7 @@ public class TerrainGen extends Actor
     private static ImpassableBoxLeftSide impassableBoxLeftSideArray[] = new ImpassableBoxLeftSide[1152];
     private static ImpassableBoxRightSide impassableBoxRightSideArray[] = new ImpassableBoxRightSide[1152];
     private static ImpassableBoxFloor impassableBoxFloorArray[] = new ImpassableBoxFloor[1152];
-    private static ImpassableBoxCieling impassableBoxCielingArray[] = new ImpassableBoxCieling[1152];
+    private static ImpassableBoxCeiling impassableBoxCeilingArray[] = new ImpassableBoxCeiling[1152];
     
     private int tileSize = 24; // Tiles are 24 x 24 pixels
     private int floorTileSize = 20;
@@ -34,12 +34,12 @@ public class TerrainGen extends Actor
             if(map[i] == 1){
                 impassableBoxLeftSideArray[i] = new ImpassableBoxLeftSide(floorSideWidth,sideTileSize);
                 impassableBoxRightSideArray[i] = new ImpassableBoxRightSide(floorSideWidth,sideTileSize);
-                impassableBoxCielingArray[i] = new ImpassableBoxCieling(floorTileSize,floorSideWidth);
+                impassableBoxCeilingArray[i] = new ImpassableBoxCeiling(floorTileSize,floorSideWidth);
                 impassableBoxFloorArray[i] = new ImpassableBoxFloor(floorTileSize,floorSideWidth);
                 pc.getWorld().addObject(impassableBoxLeftSideArray[i], i % cols * tileSize,(int)Math.floor(i/cols) * tileSize + offset);
                 pc.getWorld().addObject(impassableBoxRightSideArray[i], i % cols * tileSize + offset*2,(int)Math.floor(i/cols) * tileSize + offset);
                 pc.getWorld().addObject(impassableBoxFloorArray[i], i % cols * tileSize + offset,(int)Math.floor(i/cols) * tileSize);
-                pc.getWorld().addObject(impassableBoxCielingArray[i], i % cols * tileSize + offset,(int)Math.floor(i/cols) * tileSize + offset*2);
+                pc.getWorld().addObject(impassableBoxCeilingArray[i], i % cols * tileSize + offset,(int)Math.floor(i/cols) * tileSize + offset*2);
             }
             /*
             if(map[i] == 2){
@@ -50,9 +50,9 @@ public class TerrainGen extends Actor
             }
             if(map[i] == 3){
                 impassableBoxFloorArray[i] = new ImpassableBoxFloor(tileSize,floorSideWidth);
-                impassableBoxCielingArray[i] = new ImpassableBoxCieling(tileSize,floorSideWidth);
+                impassableBoxCeilingArray[i] = new ImpassableBoxCeiling(tileSize,floorSideWidth);
                 pc.getWorld().addObject(impassableBoxFloorArray[i], i % cols * tileSize + offset,(int)Math.floor(i/cols) * tileSize);
-                pc.getWorld().addObject(impassableBoxCielingArray[i], i % cols * tileSize + offset,(int)Math.floor(i/cols) * tileSize + offset*2);
+                pc.getWorld().addObject(impassableBoxCeilingArray[i], i % cols * tileSize + offset,(int)Math.floor(i/cols) * tileSize + offset*2);
             }
             */
         }

@@ -6,9 +6,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class ImpassableBoxCieling extends Actor
+public class ImpassableBoxCeiling extends Actor
 {
-    public ImpassableBoxCieling(int width, int height)
+    public ImpassableBoxCeiling(int width, int height)
     {
         // Creates an invisible box
         GreenfootImage boundingBox = new GreenfootImage(width, height);
