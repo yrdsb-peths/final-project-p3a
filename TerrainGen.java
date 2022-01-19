@@ -9,10 +9,17 @@ public class TerrainGen extends Actor
 {
     // Array to hold the possible locations (tiles) of an ImpassableBox actor
     // There are 1152 possible locations, 48 tiles x 24 tiles
-    private static ImpassableBox[] impassableBoxArray = new ImpassableBox[1152];
+    private static ImpassableBoxLeftSide impassableBoxLeftSideArray[] = new ImpassableBoxLeftSide[1152];
+    private static ImpassableBoxRightSide impassableBoxRightSideArray[] = new ImpassableBoxRightSide[1152];
+    private static ImpassableBoxFloor impassableBoxFloorArray[] = new ImpassableBoxFloor[1152];
+    private static ImpassableBoxCeiling impassableBoxCeilingArray[] = new ImpassableBoxCeiling[1152];
+    
     private int tileSize = 24; // Tiles are 24 x 24 pixels
+    private int floorTileSize = 20;
+    private int sideTileSize = 20; 
     private int cols = 48; // The map is 48 tiles wide
     private int offset = tileSize/2; // Greenfoot drawing offset
+    private int floorSideWidth = 1;
     private int[] map;
     private World world;
     /**
@@ -25,9 +32,29 @@ public class TerrainGen extends Actor
     public void createMap(Player pc){
         for(int i = 0; i < map.length; i++){
             if(map[i] == 1){
-                impassableBoxArray[i] = new ImpassableBox (tileSize,tileSize);
-                pc.getWorld().addObject(impassableBoxArray[i], i % cols * tileSize + offset ,(int)Math.floor(i/cols) * tileSize + offset);
+                impassableBoxLeftSideArray[i] = new ImpassableBoxLeftSide(floorSideWidth,sideTileSize);
+                impassableBoxRightSideArray[i] = new ImpassableBoxRightSide(floorSideWidth,sideTileSize);
+                impassableBoxCeilingArray[i] = new ImpassableBoxCeiling(floorTileSize,floorSideWidth);
+                impassableBoxFloorArray[i] = new ImpassableBoxFloor(floorTileSize,floorSideWidth);
+                pc.getWorld().addObject(impassableBoxLeftSideArray[i], i % cols * tileSize,(int)Math.floor(i/cols) * tileSize + offset);
+                pc.getWorld().addObject(impassableBoxRightSideArray[i], i % cols * tileSize + offset*2,(int)Math.floor(i/cols) * tileSize + offset);
+                pc.getWorld().addObject(impassableBoxFloorArray[i], i % cols * tileSize + offset,(int)Math.floor(i/cols) * tileSize);
+                pc.getWorld().addObject(impassableBoxCeilingArray[i], i % cols * tileSize + offset,(int)Math.floor(i/cols) * tileSize + offset*2);
             }
+            /*
+            if(map[i] == 2){
+                impassableBoxLeftSideArray[i] = new ImpassableBoxLeftSide(floorSideWidth,tileSize);
+                impassableBoxRightSideArray[i] = new ImpassableBoxRightSide(floorSideWidth,tileSize);
+                pc.getWorld().addObject(impassableBoxLeftSideArray[i], i % cols * tileSize,(int)Math.floor(i/cols) * tileSize + offset);
+                pc.getWorld().addObject(impassableBoxRightSideArray[i], i % cols * tileSize + offset*2,(int)Math.floor(i/cols) * tileSize + offset);
+            }
+            if(map[i] == 3){
+                impassableBoxFloorArray[i] = new ImpassableBoxFloor(tileSize,floorSideWidth);
+                impassableBoxCeilingArray[i] = new ImpassableBoxCeiling(tileSize,floorSideWidth);
+                pc.getWorld().addObject(impassableBoxFloorArray[i], i % cols * tileSize + offset,(int)Math.floor(i/cols) * tileSize);
+                pc.getWorld().addObject(impassableBoxCeilingArray[i], i % cols * tileSize + offset,(int)Math.floor(i/cols) * tileSize + offset*2);
+            }
+            */
         }
     }
 }
