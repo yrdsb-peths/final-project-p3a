@@ -13,7 +13,6 @@ public class MapReader
         try {
             File mapFile = new File(levelMap);
             Scanner scanner = new Scanner(mapFile);
-            int arrMax = 0;
             for(int i = 0; i < map.length; i++){
                 map[i] = scanner.nextInt();
             }
@@ -23,4 +22,3 @@ public class MapReader
         return map;
     }
 }
-
