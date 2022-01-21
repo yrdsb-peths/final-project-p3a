@@ -15,6 +15,9 @@ public class TerrainGen extends Actor
     private static ImpassableBoxCeiling impassableBoxCeilingArray[] = new ImpassableBoxCeiling[1152];
     private static EmptyVoid emptyVoidArray[] = new EmptyVoid[1152];
     private static NextLevel nextLevelArray[] = new NextLevel[1152];
+    private static Heart[] heartArr = new Heart[1152];
+    private static Chest[] chestArr = new Chest[1152];
+    private static Coin[] coinArr = new Coin[1152];
     private int tileSize = 24; // Tiles are 24 x 24 pixels
     private int drawnTileSize = 20; //Drawn tiles are 20 x 20 pixels to prevent overlapping tiles
     private int platformTileSize = 12;
@@ -55,6 +58,21 @@ public class TerrainGen extends Actor
             if(map[i] == 4){
                 nextLevelArray[i] = new NextLevel(drawnTileSize, drawnTileSize);
                 pc.getWorld().addObject(nextLevelArray[i], i % cols * tileSize + offset, (int)Math.floor(i/cols) * tileSize + offset);
+            }
+            if(map[i] == 5){ // Hearts
+                heartArr[i] = new Heart();
+                pc.getWorld().addObject(heartArr[i], i % cols * tileSize + offset, (int)Math.floor(i/cols) * tileSize + offset);
+            }
+            if(map[i] == 6){ // Coins
+                coinArr[i] = new Coin();
+                pc.getWorld().addObject(coinArr[i], i % cols * tileSize + offset, (int)Math.floor(i/cols) * tileSize + offset);
+            }    
+            if(map[i] == 7){ // Chest
+                chestArr[i] = new Chest();
+                pc.getWorld().addObject(chestArr[i], i % cols * tileSize + offset, (int)Math.floor(i/cols) * tileSize + (offset - 1));
+            }
+            if(map[i] == 8){ // Spike
+                
             }
             /*
             if(map[i] == 2){
