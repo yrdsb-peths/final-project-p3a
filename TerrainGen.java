@@ -44,10 +44,8 @@ public class TerrainGen extends Actor
             }
             if(map[i] == 2){
                 impassableBoxFloorArray[i] = new ImpassableBoxFloor(platformTileSize,floorSideWidth+10);
-                impassableBoxLeftSideArray[i] = new ImpassableBoxLeftSide(floorSideWidth,floorSideWidth);
                 impassableBoxCeilingArray[i] = new ImpassableBoxCeiling(platformTileSize,floorSideWidth);
                 pc.getWorld().addObject(impassableBoxFloorArray[i], i % cols * tileSize + offset,(int)Math.floor(i/cols) * tileSize);
-                //pc.getWorld().addObject(impassableBoxLeftSideArray[i], i % cols * tileSize + offset,(int)Math.floor(i/cols) * tileSize + 3);
                 pc.getWorld().addObject(impassableBoxCeilingArray[i], i % cols * tileSize + offset,(int)Math.floor(i/cols) * tileSize + 6);
             }
             if(map[i] == 3){
