@@ -8,6 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Player extends Actor
 {
+    private String curWorld;
     private double GRAVITY = 0.1; // gravity speed
     private int MAX_VERT_VELOCITY = 20;
     private double jumpSpeed = 8.0; // jump speed
@@ -41,8 +42,9 @@ public class Player extends Actor
     private GreenfootImage[][] walk = new GreenfootImage[2][6];
     private GreenfootImage[][] jump = new GreenfootImage[2][4];
     private GreenfootImage[][] fall = new GreenfootImage[2][2];
-    public Player()
+    public Player(String curWorld)
     {
+        this.curWorld = curWorld;
         // Idles left and right:
         for(int i = 0; i <= 1; i++) // Right = 0, Left = 1
         {
@@ -118,7 +120,7 @@ public class Player extends Actor
         }
         y += amountFallen;
     }
-    private void movement()
+    private void movementCollision()
     {
         x= 0;
         y= 0;
@@ -185,10 +187,35 @@ public class Player extends Actor
             fall();
         }
         move(x,y);
-        if (isTouching(ImpassableBoxFloor.class) && isFalling == true){
-            
-            isJumping = false;
-            isFalling = false;
+        if (!isTouching(ImpassableBoxCeiling.class)){
+            if (isTouching(ImpassableBoxFloor.class) && isFalling == true){
+                isJumping = false;
+                isFalling = false;
+            }
+        }
+        if (isTouching(ImpassableBoxCeiling.class) && isTouching(ImpassableBoxFloor.class)){
+            y += 1;
+        }
+        if(isTouching(EmptyVoid.class)){
+            setLocation(100,100);
+        }
+        if(isTouching(NextLevel.class)){
+            nextWorld(curWorld);
+        }
+    }
+    
+    
+    
+    public void nextWorld(String curWorld){
+        // If the Player object is touching any object of the NextLevelBox class
+        if(isTouching(NextLevel.class)){
+            if(curWorld.equals("LevelOne")){ // If on level one
+                LevelTwo gameWorld= new LevelTwo();
+                Greenfoot.setWorld(gameWorld); // Go to level two
+            }else if (curWorld.equals("LevelTwo")){ // If on level two
+                LevelThree gameWorld= new LevelThree();
+                Greenfoot.setWorld(gameWorld); // Go to level one
+            }
         }
     }
     // Refine code
@@ -274,7 +301,7 @@ public class Player extends Actor
     }
     public void act(){
         animationState();
-        movement();
+        movementCollision();
         
     }
 }
