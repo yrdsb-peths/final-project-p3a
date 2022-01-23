@@ -18,12 +18,15 @@ public class TitleScreen extends World
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(600, 400, 1); 
         
+        // Reset variables
+        Player.spawn[0] = 200;
+        Player.spawn[1] = 528;
     }
     public void act(){
+        Player.spawn[0] = 200;
+        Player.spawn[1] = 528;
         if ("space".equals(Greenfoot.getKey())){
-            LevelOne curWorld = new LevelOne();
-             
-            
+            LevelTwo curWorld = new LevelTwo();
             Greenfoot.setWorld(curWorld);
         }
     }

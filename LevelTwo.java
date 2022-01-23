@@ -13,7 +13,7 @@ public class LevelTwo extends World
      * Constructor for objects of class LevelTwo.
      * 
      */
-    private TerrainGen tGenerator = new TerrainGen("levelOneMap.txt");
+    private TerrainGen tGenerator = new TerrainGen("LevelTwoMap.txt");
     /**
      * Constructor for objects of class levelOne.
      * 
@@ -22,7 +22,7 @@ public class LevelTwo extends World
     {
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(384*3, 192*3, 1);
-        GreenfootImage bg = new GreenfootImage("untitled3.png");
+        GreenfootImage bg = new GreenfootImage("leveltwo.png");
         bg.scale(384*3, 192*3);
         setBackground(bg);
         Player player = new Player("LevelTwo");

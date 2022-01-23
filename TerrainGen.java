@@ -18,6 +18,7 @@ public class TerrainGen extends Actor
     private static Heart[] heartArr = new Heart[1152];
     private static Chest[] chestArr = new Chest[1152];
     private static Coin[] coinArr = new Coin[1152];
+    private static Spike[] spikeArr = new Spike[1152];
     private int tileSize = 24; // Tiles are 24 x 24 pixels
     private int drawnTileSize = 20; //Drawn tiles are 20 x 20 pixels to prevent overlapping tiles
     private int platformTileSize = 12;
@@ -67,12 +68,13 @@ public class TerrainGen extends Actor
                 coinArr[i] = new Coin();
                 pc.getWorld().addObject(coinArr[i], i % cols * tileSize + offset, (int)Math.floor(i/cols) * tileSize + offset);
             }    
-            if(map[i] == 7){ // Chest
+            if(map[i] == 7){ // Chest; spawns on left side of a 2 tile space
                 chestArr[i] = new Chest();
-                pc.getWorld().addObject(chestArr[i], i % cols * tileSize + offset, (int)Math.floor(i/cols) * tileSize + (offset - 1));
+                pc.getWorld().addObject(chestArr[i], i % cols * tileSize + 24, (int)Math.floor(i/cols) * tileSize + (offset - 1));
             }
             if(map[i] == 8){ // Spike
-                
+                spikeArr[i] = new Spike();
+                pc.getWorld().addObject(spikeArr[i], i % cols * tileSize + 12, (int)Math.floor(i/cols) * tileSize + (offset + 3));
             }
             /*
             if(map[i] == 2){
