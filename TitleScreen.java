@@ -23,10 +23,8 @@ public class TitleScreen extends World
         Player.spawn[1] = 528;
     }
     public void act(){
-        Player.spawn[0] = 200;
-        Player.spawn[1] = 528;
         if ("space".equals(Greenfoot.getKey())){
-            LevelTwo curWorld = new LevelTwo();
+            Tutorial curWorld = new Tutorial();
             Greenfoot.setWorld(curWorld);
         }
     }
