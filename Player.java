@@ -11,6 +11,7 @@ public class Player extends Actor
     // World variables
     private String curWorld;
     public static int[] spawn = {200, 528}; // Default is for tutorial
+    // Note: First life listed here is third life slot
     public static Lives[] lives = {new Lives(true), new Lives(true), new Lives(true)};
     public static int score = 0;
     
@@ -311,17 +312,24 @@ public class Player extends Actor
     }
     public void updateHP(boolean heal) // if false, damage
     {
-        for (int i = 0; i < lives.length; i++)
+        if (lives[0].getFilled() && heal) // has max HP and healing
         {
-            if (lives[i].getFilled() && !heal) // Has HP here and taking dmg
+            score += 300; // Increase score
+        }
+        else // Not max hp or not healing
+        {
+            for (int i = 0; i < lives.length; i++)
             {
-                lives[i].updateStatus(false);
-                break;
-            }
-            else if (!lives[i].getFilled() && heal) // No HP here and healing
-            {
-                lives[i].updateStatus(true);
-                break;
+                if (lives[i].getFilled() && !heal) // Has HP here and taking dmg
+                {
+                    lives[i].updateStatus(false);
+                    break;
+                }
+                else if (!lives[i].getFilled() && heal) // No HP here and healing
+                {
+                    lives[i].updateStatus(true);
+                    break;
+                }
             }
         }
     }

@@ -16,6 +16,6 @@ public class Utilities
     }
     public static void drawScore(Player pc)
     {
-        pc.getWorld().addObject(new ScoreCount(pc), 384*3 - ((144/4)), 68);
+        pc.getWorld().addObject(new ScoreCount(pc), 384*3 - ((144/5)*2), 68);
     }
 }
