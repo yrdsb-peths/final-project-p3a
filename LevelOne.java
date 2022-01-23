@@ -23,5 +23,6 @@ public class LevelOne extends World
         Player player = new Player("LevelOne");
         addObject(player, 48, 504);
         tGenerator.createMap(player);
+        Utilities.drawHP(player);
     }
 }

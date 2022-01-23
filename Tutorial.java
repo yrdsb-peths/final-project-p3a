@@ -23,5 +23,6 @@ public class Tutorial extends World
         Player player = new Player("Tutorial");
         addObject(player, 200, 528);
         tGenerator.createMap(player);
+        Utilities.drawHP(player);
     }
 }

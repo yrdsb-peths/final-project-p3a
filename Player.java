@@ -11,6 +11,8 @@ public class Player extends Actor
     // World variables
     private String curWorld;
     public static int[] spawn = {200, 528}; // Default is for tutorial
+    public static Lives[] lives = {new Lives(true), new Lives(true), new Lives(true)};
+    public static int score = 0;
     
     // Movement variables
     private double GRAVITY = 0.1; // gravity speed
@@ -202,15 +204,17 @@ public class Player extends Actor
         if (isTouching(ImpassableBoxCeiling.class) && isTouching(ImpassableBoxFloor.class)){
             y += 1;
         }
-        if(isTouching(EmptyVoid.class)){
+        if(isTouching(EmptyVoid.class) || isTouching(Spike.class)){
             y = 0; // Reset velocities
             x = 0;
+            updateHP(false);
             setLocation(spawn[0], spawn[1] - 24); // Reset to spawn; -24 offset on y to prevent clipping
         }
         if(isTouching(NextLevel.class)){
             nextWorld(curWorld);
         }
     }
+    
     public void nextWorld(String curWorld){
         // If the Player object is touching any object of the NextLevelBox class
         if(isTouching(NextLevel.class)){
@@ -305,6 +309,22 @@ public class Player extends Actor
         frameInterval++;
         ignoreCD = false;
         forceIdle = false;
+    }
+    private void updateHP(boolean heal) // if false, damage
+    {
+        for (int i = 0; i < lives.length; i++)
+        {
+            if (lives[i].getFilled() && !heal) // Has HP here and taking dmg
+            {
+                lives[i].updateStatus(false);
+                break;
+            }
+            else if (!lives[i].getFilled() && heal) // No HP here and healing
+            {
+                lives[i].updateStatus(true);
+                break;
+            }
+        }
     }
     private void changeFrameDir(int newDir)
     {

@@ -21,6 +21,11 @@ public class TitleScreen extends World
         // Reset variables
         Player.spawn[0] = 200;
         Player.spawn[1] = 528;
+        for (int i = 0; i < Player.lives.length; i++)
+        {
+            Player.lives[i].updateStatus(true);
+        }
+        Player.score = 0;
     }
     public void act(){
         if ("space".equals(Greenfoot.getKey())){
