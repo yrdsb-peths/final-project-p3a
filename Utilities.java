@@ -14,4 +14,8 @@ public class Utilities
                 0 + (Lives.resizeY/2));
         }
     }
+    public static void drawScore(Player pc)
+    {
+        pc.getWorld().addObject(new ScoreCount(pc), 384*3 - ((144/4)), 68);
+    }
 }

@@ -20,11 +20,15 @@ public class LevelOne extends World
         GreenfootImage bg = new GreenfootImage("levelone.png");
         bg.scale(384*3, 192*3);
         setBackground(bg);
+        
         Player player = new Player("LevelOne");
         addObject(player, 48, 504);
+        
         HitboxVisualizer hitbox = new HitboxVisualizer(player);
         addObject(hitbox, 0, 0);
+        
         tGenerator.createMap(player);
         Utilities.drawHP(player);
+        Utilities.drawScore(player);
     }
 }

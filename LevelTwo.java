@@ -25,10 +25,15 @@ public class LevelTwo extends World
         GreenfootImage bg = new GreenfootImage("leveltwo.png");
         bg.scale(384*3, 192*3);
         setBackground(bg);
+        
         Player player = new Player("LevelTwo");
         addObject(player, 100, 100);
+        
         HitboxVisualizer hitbox = new HitboxVisualizer(player);
         addObject(hitbox, 0, 0);
+        
         tGenerator.createMap(player);
+        Utilities.drawHP(player);
+        Utilities.drawScore(player);
     }
 }

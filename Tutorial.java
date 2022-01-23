@@ -20,11 +20,15 @@ public class Tutorial extends World
         GreenfootImage bg = new GreenfootImage("tutorial.png");
         bg.scale(384*3, 192*3);
         setBackground(bg);
+        
         Player player = new Player("Tutorial");
         addObject(player, 200, 528);
+        
         HitboxVisualizer hitbox = new HitboxVisualizer(player);
-        addObject(hitbox, 0, 0);
+        addObject(hitbox, 0, 0); 
+        
         tGenerator.createMap(player);
         Utilities.drawHP(player);
+        Utilities.drawScore(player);
     }
 }
