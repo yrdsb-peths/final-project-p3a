@@ -27,6 +27,8 @@ public class LevelTwo extends World
         setBackground(bg);
         Player player = new Player("LevelTwo");
         addObject(player, 100, 100);
+        HitboxVisualizer hitbox = new HitboxVisualizer(player);
+        addObject(hitbox, 0, 0);
         tGenerator.createMap(player);
     }
 }

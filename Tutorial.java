@@ -22,6 +22,8 @@ public class Tutorial extends World
         setBackground(bg);
         Player player = new Player("Tutorial");
         addObject(player, 200, 528);
+        HitboxVisualizer hitbox = new HitboxVisualizer(player);
+        addObject(hitbox, 0, 0);
         tGenerator.createMap(player);
         Utilities.drawHP(player);
     }

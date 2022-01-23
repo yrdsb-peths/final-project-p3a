@@ -22,6 +22,8 @@ public class LevelOne extends World
         setBackground(bg);
         Player player = new Player("LevelOne");
         addObject(player, 48, 504);
+        HitboxVisualizer hitbox = new HitboxVisualizer(player);
+        addObject(hitbox, 0, 0);
         tGenerator.createMap(player);
         Utilities.drawHP(player);
     }

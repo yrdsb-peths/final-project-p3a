@@ -52,7 +52,6 @@ public class Player extends Actor
     public Player(String curWorld)
     {
         this.curWorld = curWorld;
-        
         // Idles left and right:
         for(int i = 0; i <= 1; i++) // Right = 0, Left = 1
         {
@@ -204,7 +203,7 @@ public class Player extends Actor
         if (isTouching(ImpassableBoxCeiling.class) && isTouching(ImpassableBoxFloor.class)){
             y += 1;
         }
-        if(isTouching(EmptyVoid.class) || isTouching(Spike.class)){
+        if(isTouching(EmptyVoid.class)){
             y = 0; // Reset velocities
             x = 0;
             updateHP(false);
@@ -310,7 +309,7 @@ public class Player extends Actor
         ignoreCD = false;
         forceIdle = false;
     }
-    private void updateHP(boolean heal) // if false, damage
+    public void updateHP(boolean heal) // if false, damage
     {
         for (int i = 0; i < lives.length; i++)
         {
