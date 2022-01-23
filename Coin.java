@@ -8,7 +8,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Coin extends Actor
 {
-    private final int value = 100;
     public Coin()
     {
         setImage("Collectables/Coin.png");

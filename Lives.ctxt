@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=Lives
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Lives\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment1.params=filled
+comment1.target=Lives(boolean)
+comment2.params=
+comment2.target=boolean\ getFilled()
+comment3.params=filled
+comment3.target=void\ updateStatus(boolean)
+numComments=4

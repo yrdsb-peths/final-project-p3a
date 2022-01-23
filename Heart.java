@@ -8,7 +8,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Heart extends Actor
 {
-    private final int restore = 1;
     public Heart()
     {
         setImage("Collectables/Heart.png");

@@ -8,7 +8,13 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Player extends Actor
 {
+    // World variables
     private String curWorld;
+    public static int[] spawn = {200, 528}; // Default is for tutorial
+    public static Lives[] lives = {new Lives(true), new Lives(true), new Lives(true)};
+    public static int score = 0;
+    
+    // Movement variables
     private double GRAVITY = 0.1; // gravity speed
     private int MAX_VERT_VELOCITY = 20;
     private double jumpSpeed = 8.0; // jump speed
@@ -29,15 +35,16 @@ public class Player extends Actor
     private boolean isFalling = false;
     private boolean isJumping = false;
     private char lastMoveState;
-    // Animation arrays probably could be simplified further
+    
+    // Animation variables
     private int frame = 0; // Current animation frame
     private int frameDir = 0; // Direction of animation, right = 0, left = 1
     private int lastFrameDir = 0; // Direction of last animation played
     private int frameInterval = 0; // Time waited for animation
     private int frameDelay = 10; // Time to wait for next animation
     private boolean ignoreCD = false; // Ignore animation cooldown
-    private boolean forceIdle = false;
-    private String lastMove = "none";
+    private boolean forceIdle = false; // Force into idle animation
+    private String lastMove = "none"; // Last movement animation
     private GreenfootImage[][] idle = new GreenfootImage[2][4];
     private GreenfootImage[][] walk = new GreenfootImage[2][6];
     private GreenfootImage[][] jump = new GreenfootImage[2][4];
@@ -197,19 +204,27 @@ public class Player extends Actor
             y += 1;
         }
         if(isTouching(EmptyVoid.class)){
-            setLocation(100,100);
+            y = 0; // Reset velocities
+            x = 0;
+            updateHP(false);
+            setLocation(spawn[0], spawn[1] - 24); // Reset to spawn; -24 offset on y to prevent clipping
         }
         if(isTouching(NextLevel.class)){
             nextWorld(curWorld);
         }
     }
     
-    
-    
     public void nextWorld(String curWorld){
         // If the Player object is touching any object of the NextLevelBox class
         if(isTouching(NextLevel.class)){
-            if(curWorld.equals("LevelOne")){ // If on level one
+            if(curWorld.equals("Tutorial")){ // If on tutorial
+                spawn[0] = 48; // Sets spawn x
+                spawn[1] = 504; // Sets spawn y
+                LevelOne gameWorld = new LevelOne();
+                Greenfoot.setWorld(gameWorld); // Go to level one
+            }else if(curWorld.equals("LevelOne")){ // If on level one
+                spawn[0] = 100;
+                spawn[1] = 100;
                 LevelTwo gameWorld= new LevelTwo();
                 Greenfoot.setWorld(gameWorld); // Go to level two
             }else if (curWorld.equals("LevelTwo")){ // If on level two
@@ -218,7 +233,7 @@ public class Player extends Actor
             }
         }
     }
-    // Refine code
+    
     private void animationState()
     {
         if(lastFrameDir != frameDir)
@@ -293,6 +308,33 @@ public class Player extends Actor
         frameInterval++;
         ignoreCD = false;
         forceIdle = false;
+    }
+    public void updateHP(boolean heal) // if false, damage
+    {
+        for (int i = 0; i < lives.length; i++)
+        {
+            if (lives[i].getFilled() && !heal) // Has HP here and taking dmg
+            {
+                lives[i].updateStatus(false);
+                break;
+            }
+            else if (!lives[i].getFilled() && heal) // No HP here and healing
+            {
+                lives[i].updateStatus(true);
+                break;
+            }
+        }
+    }
+    public void updateScore(String collected)
+    {
+        if (collected.equals("Chest"))
+        {
+            score += 500;
+        }
+        else if (collected.equals("Coin"))
+        {
+            score += 100;
+        }
     }
     private void changeFrameDir(int newDir)
     {
