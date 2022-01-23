@@ -325,6 +325,17 @@ public class Player extends Actor
             }
         }
     }
+    public void updateScore(String collected)
+    {
+        if (collected.equals("Chest"))
+        {
+            score += 500;
+        }
+        else if (collected.equals("Coin"))
+        {
+            score += 100;
+        }
+    }
     private void changeFrameDir(int newDir)
     {
         lastFrameDir = frameDir;
