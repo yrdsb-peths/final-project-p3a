@@ -12,7 +12,7 @@ public class HitboxVisualizer extends Actor
     public HitboxVisualizer(Player pc)
     {
         this.pc = pc;
-        GreenfootImage boundingBox = new GreenfootImage((int)(24*1.2), (int)(30*1.6));
+        GreenfootImage boundingBox = new GreenfootImage((int)(24*1.18), (int)(30*1.5));
         setImage(boundingBox);
         
         boundingBox.setColor(new Color(128, 128, 128));
@@ -47,7 +47,7 @@ public class HitboxVisualizer extends Actor
     }
     public void act()
     {
-        setLocation(pc.getX(), pc.getY());
+        setLocation(pc.getX(), pc.getY()-2);
         checkCollision();
     }
 }

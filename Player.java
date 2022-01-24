@@ -229,24 +229,21 @@ public class Player extends Actor
                 LevelTwo gameWorld= new LevelTwo();
                 Greenfoot.setWorld(gameWorld); // Go to level two
             }else if (curWorld.equals("LevelTwo")){ // If on level two
+                spawn[0] = 48;
+                spawn[1] = 312;
                 LevelThree gameWorld= new LevelThree();
                 Greenfoot.setWorld(gameWorld); // Go to level one
             } else if (curWorld.equals("LevelThree")){
-                //LevelFour gameWorld = new LevelFour();
-                //Greenfoot.setWorld(gameWorld);
-            } else if (curWorld.equals("LevelFour")){
                 Win gameWorld = new Win();
-                Greenfoot.setWorld(gameWorld);
+                Greenfoot.setWorld(gameWorld); // Go to win screen
             }
         }
     }
-    
     public void gameOver(){
         Scores.registerScore(score);
         Scores gameWorld = new Scores();
         Greenfoot.setWorld(gameWorld);
     }
-    
     private void animationState()
     {
         if(lastFrameDir != frameDir)
@@ -330,21 +327,20 @@ public class Player extends Actor
         }
         else // Not max hp or not healing
         {
-            if (!lives[0].getFilled() && !lives[1].getFilled() && !lives[2].getFilled() && !heal){
-                gameOver();
-            } else {
-                for (int i = 0; i < lives.length; i++)
+            for (int i = 0; i < lives.length; i++)
+            {
+                if (lives[i].getFilled() && !heal) // Has HP here and taking dmg
                 {
-                    if (lives[i].getFilled() && !heal) // Has HP here and taking dmg
-                    {
-                        lives[i].updateStatus(false);
-                        break;
-                    }
-                    else if (!lives[i].getFilled() && heal) // No HP here and healing
-                    {
-                        lives[i].updateStatus(true);
-                        break;
-                    }
+                    lives[i].updateStatus(false);
+                    break;
+                }
+            }
+            for (int i = 2; i >= 0; i--)
+            {
+                if (!lives[i].getFilled() && heal) // No HP here and healing
+                {
+                    lives[i].updateStatus(true);
+                    break;
                 }
             }
         }

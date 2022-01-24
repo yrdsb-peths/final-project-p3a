@@ -30,6 +30,9 @@ public class Scores extends World
         addObject(thirdScore, getWidth()/2, getHeight()/6*3);
         addObject(fourthScore, getWidth()/2, getHeight()/6*4);
         addObject(fifthScore, getWidth()/2, getHeight()/6*5);
+        GreenfootImage bg = new GreenfootImage("Scores.png");
+        bg.scale(384*3, 192*3);
+        setBackground(bg);
     }
     public static void registerScore(int score)
     {
