@@ -12,6 +12,9 @@ public class Scores extends World
     public Scores()
     {    
         super(384*3, 192*3, 1); 
+        GreenfootImage bg = new GreenfootImage("Scores.png");
+        bg.scale(384*3, 192*3);
+        setBackground(bg);
     }
     public static void registerScore(int score)
     {
