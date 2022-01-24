@@ -16,7 +16,13 @@ public class TitleScreen extends World
     public TitleScreen()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(600, 400, 1); 
+        super(384*3, 192*3, 1);
+        GreenfootImage bg = new GreenfootImage("TitleScreen.png");
+        bg.scale(384*3, 192*3);
+        setBackground(bg);
+        
+        Play playTag = new Play();
+        addObject(playTag, getWidth()/2, (getHeight()/5)*4);
         
         // Reset variables
         Player.spawn[0] = 200;
