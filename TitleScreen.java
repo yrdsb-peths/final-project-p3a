@@ -34,7 +34,7 @@ public class TitleScreen extends World
         Player.score = 0;
     }
     public void act(){
-        if ("space".equals(Greenfoot.getKey())){
+        if (Greenfoot.isKeyDown("space")){
             Tutorial curWorld = new Tutorial();
             Greenfoot.setWorld(curWorld);
         }

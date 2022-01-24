@@ -11,6 +11,22 @@ public class Win extends World
     public Win()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(384*3, 192*3, 1); 
+        super(384*3, 192*3, 1);
+        GreenfootImage bg = new GreenfootImage("Win.png");
+        bg.scale(384*3, 192*3);
+        setBackground(bg);
+        Player.score = (int)((Player.score) * 1.5);
+    }
+    public void act()
+    {
+        if (Greenfoot.isKeyDown("y"))
+        {
+            Scores.registerScore(Player.score);
+        }
+        else if (Greenfoot.isKeyDown("n"))
+        {
+            Scores gameWorld = new Scores();
+            Greenfoot.setWorld(gameWorld);
+        }
     }
 }

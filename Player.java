@@ -230,7 +230,10 @@ public class Player extends Actor
                 Greenfoot.setWorld(gameWorld); // Go to level two
             }else if (curWorld.equals("LevelTwo")){ // If on level two
                 LevelThree gameWorld= new LevelThree();
-                Greenfoot.setWorld(gameWorld); // Go to level one
+                Greenfoot.setWorld(gameWorld); // Go to level three
+            }else if (curWorld.equals("LevelThree")){ // If on level three
+                Win gameWorld = new Win();
+                Greenfoot.setWorld(gameWorld); // Go to win screen
             }
         }
     }
