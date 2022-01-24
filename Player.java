@@ -231,8 +231,19 @@ public class Player extends Actor
             }else if (curWorld.equals("LevelTwo")){ // If on level two
                 LevelThree gameWorld= new LevelThree();
                 Greenfoot.setWorld(gameWorld); // Go to level one
+            } else if (curWorld.equals("LevelThree")){
+                LevelFour gameWorld = new LevelFour();
+                Greenfoot.setWorld(gameWorld);
+            } else if (curWorld.equals("LevelFour")){
+                Win gameWorld = new Win();
+                Greenfoot.setWorld(gameWorld);
             }
         }
+    }
+    
+    public void gameOver(){
+        Lose gameWorld = new Lose();
+        Greenfoot.setWorld(gameWorld);
     }
     
     private void animationState()
@@ -318,17 +329,21 @@ public class Player extends Actor
         }
         else // Not max hp or not healing
         {
-            for (int i = 0; i < lives.length; i++)
-            {
-                if (lives[i].getFilled() && !heal) // Has HP here and taking dmg
+            if (!lives[0].getFilled() && !lives[1].getFilled() && !lives[2].getFilled() && !heal){
+                gameOver();
+            } else {
+                for (int i = 0; i < lives.length; i++)
                 {
-                    lives[i].updateStatus(false);
-                    break;
-                }
-                else if (!lives[i].getFilled() && heal) // No HP here and healing
-                {
-                    lives[i].updateStatus(true);
-                    break;
+                    if (lives[i].getFilled() && !heal) // Has HP here and taking dmg
+                    {
+                        lives[i].updateStatus(false);
+                        break;
+                    }
+                    else if (!lives[i].getFilled() && heal) // No HP here and healing
+                    {
+                        lives[i].updateStatus(true);
+                        break;
+                    }
                 }
             }
         }
