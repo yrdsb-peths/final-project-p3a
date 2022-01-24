@@ -18,43 +18,76 @@ public class Scores extends World
     public Scores()
     {    
         super(384*3, 192*3, 1); 
-        Label scoreLabel = new Label("Highscores", 50);
         Label topScore = new Label(0, 50);
         Label secondScore = new Label(0, 50);
         Label thirdScore = new Label(0, 50);
         Label fourthScore = new Label(0, 50);
         Label fifthScore = new Label(0, 50);
-        addObject(scoreLabel, getWidth()/2, getHeight()/12);
-        addObject(topScore, getWidth()/2, getHeight()/6);
-        addObject(secondScore, getWidth()/2, getHeight()/6*2);
-        addObject(thirdScore, getWidth()/2, getHeight()/6*3);
-        addObject(fourthScore, getWidth()/2, getHeight()/6*4);
-        addObject(fifthScore, getWidth()/2, getHeight()/6*5);
+        Label sixthScore = new Label(0, 50);
+        Label seventhScore = new Label(0, 50);
+        Label eighthScore = new Label(0, 50);
+        addObject(topScore, 7*24, 10*24);
+        addObject(secondScore, 7*24, 13*24);
+        addObject(thirdScore, 7*24, 16*24);
+        addObject(fourthScore, 7*24, 19*24);
+        addObject(fifthScore, 27*24, 10*24);
+        addObject(sixthScore, 27*24, 13*24);
+        addObject(seventhScore, 27*24, 16*24);
+        addObject(eighthScore, 27*24, 19*24);
         GreenfootImage bg = new GreenfootImage("Scores.png");
         bg.scale(384*3, 192*3);
         setBackground(bg);
+        for (int i = 1; i <= 8; i++)
+        {
+            String scoreDisplayed = "";
+            if ((scores.size()-i) < 0)
+            {
+                scoreDisplayed = "-------";
+            }
+            else
+            {
+                scoreDisplayed = Integer.toString((scores.get(scores.size()-i)));
+            }
+            if (i == 1)
+            {
+                topScore.setValue(scoreDisplayed);
+            }
+            else if (i == 2)
+            {
+                secondScore.setValue(scoreDisplayed);
+            }
+            else if (i == 3)
+            {
+                thirdScore.setValue(scoreDisplayed);
+            }
+            else if (i == 4)
+            {
+                fourthScore.setValue(scoreDisplayed);
+            }
+            else if (i == 5)
+            {
+                fifthScore.setValue(scoreDisplayed);
+            }
+            else if (i == 6)
+            {
+                sixthScore.setValue(scoreDisplayed);
+            }
+            else if (i == 7)
+            {
+                seventhScore.setValue(scoreDisplayed);
+            }
+            else if (i == 8)
+            {
+                eighthScore.setValue(scoreDisplayed);
+            }
+        }
     }
     public static void registerScore(int score)
     {
         scores.add(score);
         Utilities.mergeSort(scores);
     }
-    public void act(){
-        //System.out.println(scores.get(scores.size()-1));
-        topScore.setValue(100);
-        /*
-        if (scores.size() > 2){
-            secondScore.setValue(scores.get(scores.size()-2));
-            if (scores.size() > 3){
-                thirdScore.setValue(scores.get(scores.size()-3));
-                if (scores.size() > 4){
-                    fourthScore.setValue(scores.get(scores.size()-4));
-                    if (scores.size() > 5){
-                        fifthScore.setValue(scores.get(scores.size()-5));
-                    }
-                }
-            }
-        }
-        */
+    public void act()
+    {
     }
 }
