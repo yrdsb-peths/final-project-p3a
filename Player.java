@@ -229,6 +229,8 @@ public class Player extends Actor
                 LevelTwo gameWorld= new LevelTwo();
                 Greenfoot.setWorld(gameWorld); // Go to level two
             }else if (curWorld.equals("LevelTwo")){ // If on level two
+                spawn[0] = 48;
+                spawn[1] = 312;
                 LevelThree gameWorld= new LevelThree();
                 Greenfoot.setWorld(gameWorld); // Go to level three
             }else if (curWorld.equals("LevelThree")){ // If on level three
@@ -328,7 +330,10 @@ public class Player extends Actor
                     lives[i].updateStatus(false);
                     break;
                 }
-                else if (!lives[i].getFilled() && heal) // No HP here and healing
+            }
+            for (int i = 2; i >= 0; i--)
+            {
+                if (!lives[i].getFilled() && heal) // No HP here and healing
                 {
                     lives[i].updateStatus(true);
                     break;

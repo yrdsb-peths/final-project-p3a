@@ -22,6 +22,8 @@ public class Win extends World
         if (Greenfoot.isKeyDown("y"))
         {
             Scores.registerScore(Player.score);
+            Scores gameWorld = new Scores();
+            Greenfoot.setWorld(gameWorld);
         }
         else if (Greenfoot.isKeyDown("n"))
         {
