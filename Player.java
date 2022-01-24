@@ -210,6 +210,11 @@ public class Player extends Actor
             updateHP(false);
             setLocation(spawn[0], spawn[1] - 24); // Reset to spawn; -24 offset on y to prevent clipping
         }
+        if(!lives[lives.length-1].getFilled())
+        {
+            Lose gameWorld = new Lose();
+            Greenfoot.setWorld(gameWorld);
+        }
         if(isTouching(NextLevel.class)){
             nextWorld(curWorld);
         }
