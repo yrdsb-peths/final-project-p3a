@@ -16,6 +16,6 @@ public class ImpassableBoxCeiling extends Actor
         
         //code to see the bounding boxes
         boundingBox.setColor(new Color(0, 0, 255)); 
-        boundingBox.fill();
+        //boundingBox.fill();
     }
 }

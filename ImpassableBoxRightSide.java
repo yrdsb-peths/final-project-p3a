@@ -16,6 +16,6 @@ public class ImpassableBoxRightSide extends Actor
         
         //code to see the bounding boxes
         boundingBox.setColor(new Color(255, 255, 0)); 
-        boundingBox.fill();
+        //boundingBox.fill();
     }
 }

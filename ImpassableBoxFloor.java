@@ -16,6 +16,6 @@ public class ImpassableBoxFloor extends Actor
         
         //code to see the bounding boxes
         boundingBox.setColor(new Color(255, 0, 0)); 
-        boundingBox.fill();
+        //boundingBox.fill();
     }
 }
