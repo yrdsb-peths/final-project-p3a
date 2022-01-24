@@ -232,8 +232,8 @@ public class Player extends Actor
                 LevelThree gameWorld= new LevelThree();
                 Greenfoot.setWorld(gameWorld); // Go to level one
             } else if (curWorld.equals("LevelThree")){
-                LevelFour gameWorld = new LevelFour();
-                Greenfoot.setWorld(gameWorld);
+                //LevelFour gameWorld = new LevelFour();
+                //Greenfoot.setWorld(gameWorld);
             } else if (curWorld.equals("LevelFour")){
                 Win gameWorld = new Win();
                 Greenfoot.setWorld(gameWorld);
@@ -242,7 +242,8 @@ public class Player extends Actor
     }
     
     public void gameOver(){
-        Lose gameWorld = new Lose();
+        Scores.registerScore(score);
+        Scores gameWorld = new Scores();
         Greenfoot.setWorld(gameWorld);
     }
     
