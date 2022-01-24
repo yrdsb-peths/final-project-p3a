@@ -232,14 +232,18 @@ public class Player extends Actor
                 spawn[0] = 48;
                 spawn[1] = 312;
                 LevelThree gameWorld= new LevelThree();
-                Greenfoot.setWorld(gameWorld); // Go to level three
-            }else if (curWorld.equals("LevelThree")){ // If on level three
+                Greenfoot.setWorld(gameWorld); // Go to level one
+            } else if (curWorld.equals("LevelThree")){
                 Win gameWorld = new Win();
                 Greenfoot.setWorld(gameWorld); // Go to win screen
             }
         }
     }
-    
+    public void gameOver(){
+        Scores.registerScore(score);
+        Scores gameWorld = new Scores();
+        Greenfoot.setWorld(gameWorld);
+    }
     private void animationState()
     {
         if(lastFrameDir != frameDir)
