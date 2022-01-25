@@ -8,6 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Spike extends Actor
 {
+    // Spike hitbox class
     public Spike()
     {
         GreenfootImage boundingBox = new GreenfootImage(21, 18);

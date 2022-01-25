@@ -21,13 +21,13 @@ public class Utilities
     {
         pc.getWorld().addObject(new ScoreCount(pc), 384*3 - ((144/5)*2), 68);
     }
+    
+    // MergeSort code: Sorts from least -> greatest
     public static void mergeSort(ArrayList<Integer> arr)
     {
         int[] tempArr = new int[arr.size()];
         mergeSortHelper(arr, 0, arr.size() - 1, tempArr);
     }
-    
-    // MergeSort code: Sorts from least -> greatest
     private static void mergeSortHelper(ArrayList<Integer> arr, int from, int to, int[] tempArr)
     {
         if (to - from >= 1)

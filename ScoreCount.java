@@ -10,6 +10,7 @@ public class ScoreCount extends Actor
 {
     private Player pc;
     GreenfootImage score;
+    // Handles score count display on top right of all worlds
     public ScoreCount(Player pc)
     {
         this.pc = pc;

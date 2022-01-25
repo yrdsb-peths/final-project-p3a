@@ -13,6 +13,7 @@ public class Play extends Actor
     private boolean fadeIn = false;
     private GreenfootImage play;
     private int transparency;
+    // Fading play button seen on TitleScreen
     public Play()
     {
         play = new GreenfootImage("PressToPlay.png");

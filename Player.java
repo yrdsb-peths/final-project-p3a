@@ -257,9 +257,10 @@ public class Player extends Actor
     }
     private void animationState()
     {
+        // If moving left previously, but now moving right
         if(lastFrameDir != frameDir)
         {
-            if (!(aPressed && dPressed))
+            if (!(aPressed && dPressed)) // Both a and d are not pressed
             {
                 ignoreCD = true;
             }
@@ -268,18 +269,18 @@ public class Player extends Actor
                 forceIdle = true;
             }
         }
-        if(isFalling)
+        if(isFalling) // Falling
         {
-            if (!lastMove.equals("fall"))
+            if (!lastMove.equals("fall")) // Previously not falling
             {
-                frame = 0;
-                ignoreCD = true;
+                frame = 0; // Reset frame count
+                ignoreCD = true; // Skip animation delay
             }
             if (frameInterval % frameDelay == 0 || ignoreCD)
             {
-                frame = (frame + 1) % fall[0].length;
-                setImage(fall[frameDir][frame]);
-                lastMove = "fall";
+                frame = (frame + 1) % fall[0].length; // add frames on to animate
+                setImage(fall[frameDir][frame]); // set to frame
+                lastMove = "fall"; // last movement vector was fall
             }
         }
         else if(isJumping)
@@ -310,7 +311,7 @@ public class Player extends Actor
                 lastMove = "walk";
             }
         }
-        else
+        else // Player is idle
         {
             if (!lastMove.equals("idle"))
             {
@@ -322,10 +323,11 @@ public class Player extends Actor
                 frame = (frame + 1) % idle[0].length;
                 setImage(idle[frameDir][frame]);
                 lastMove = "idle";
-                lastFrameDir = frameDir;
+                lastFrameDir = frameDir; // reset movement directions
             }
         }
-        if (frameInterval >= 100){frameInterval = 0;}
+        // To avoid integer overflow, reset frameInterval
+        if (frameInterval >= 100){frameInterval = 0;} 
         frameInterval++;
         ignoreCD = false;
         forceIdle = false;
@@ -342,7 +344,7 @@ public class Player extends Actor
             {
                 if (lives[i].getFilled() && !heal) // Has HP here and taking dmg
                 {
-                    lives[i].updateStatus(false);
+                    lives[i].updateStatus(false); // Take damage
                     break;
                 }
             }
@@ -350,12 +352,13 @@ public class Player extends Actor
             {
                 if (!lives[i].getFilled() && heal) // No HP here and healing
                 {
-                    lives[i].updateStatus(true);
+                    lives[i].updateStatus(true); // heal
                     break;
                 }
             }
         }
     }
+    // Called when chest or coin is touched, increases score
     public void updateScore(String collected)
     {
         if (collected.equals("Chest"))
@@ -367,6 +370,7 @@ public class Player extends Actor
             score += 100;
         }
     }
+    // Used to manage last movement direction vs. current movement direction
     private void changeFrameDir(int newDir)
     {
         lastFrameDir = frameDir;
@@ -375,6 +379,5 @@ public class Player extends Actor
     public void act(){
         animationState();
         movementCollision();
-        
     }
 }

@@ -8,6 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Coin extends Actor
 {
+    // Class that creates coin object
     public Coin()
     {
         setImage("Collectables/Coin.png");

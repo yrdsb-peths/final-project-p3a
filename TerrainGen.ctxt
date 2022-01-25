@@ -6,4 +6,5 @@ comment1.target=TerrainGen(java.lang.String)
 comment1.text=\r\n\ Constructor\ for\ objects\ of\ class\ TerrainGen\r\n
 comment2.params=pc
 comment2.target=void\ createMap(Player)
+comment2.text=\r\n\ Creates\ a\ map\ based\ on\ the\ .txt\ file\ used\ in\ above\ constructor\r\n\ Takes\ Player\ Actor\ as\ parameter\ to\ determine\ world\r\n
 numComments=3

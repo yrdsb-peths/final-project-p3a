@@ -14,6 +14,8 @@ public class Lives extends Actor
      private GreenfootImage unfilledContainer;
      public static final int resizeX = 24*2;
      public static final int resizeY = 25*2;
+     // Class that handles the display of the player's health
+     // Also doubles to manage player's health
      public Lives(boolean filled)
      {
          this.filled = filled;

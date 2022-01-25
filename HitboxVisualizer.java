@@ -8,6 +8,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class HitboxVisualizer extends Actor
 {
+    // A class that handles the collision of player with collectables and spikes
+    // Implemented to make the hitbox more forgiving
     private Player pc;
     public HitboxVisualizer(Player pc)
     {
@@ -47,7 +49,7 @@ public class HitboxVisualizer extends Actor
     }
     public void act()
     {
-        setLocation(pc.getX(), pc.getY()-2);
-        checkCollision();
+        setLocation(pc.getX(), pc.getY()-2); // Always follows player with slight y-value offset
+        checkCollision(); // Check to see if touching something
     }
 }

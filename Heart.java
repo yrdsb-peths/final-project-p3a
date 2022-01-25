@@ -8,6 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Heart extends Actor
 {
+    // Class that creates Heart object
     public Heart()
     {
         setImage("Collectables/Heart.png");
