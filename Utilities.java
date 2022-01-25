@@ -26,6 +26,8 @@ public class Utilities
         int[] tempArr = new int[arr.size()];
         mergeSortHelper(arr, 0, arr.size() - 1, tempArr);
     }
+    
+    // MergeSort code: Sorts from least -> greatest
     private static void mergeSortHelper(ArrayList<Integer> arr, int from, int to, int[] tempArr)
     {
         if (to - from >= 1)

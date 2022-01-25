@@ -239,6 +239,12 @@ public class Player extends Actor
                 LevelThree gameWorld= new LevelThree();
                 Greenfoot.setWorld(gameWorld); // Go to level one
             } else if (curWorld.equals("LevelThree")){
+                // spawn[0] = ; // Set spawn for level four here
+                // spawn[1] = ;
+                LevelFour gameWorld = new LevelFour();
+                Greenfoot.setWorld(gameWorld); // Go to level four
+            } else if (curWorld.equals("LevelFour"))
+            {
                 Win gameWorld = new Win();
                 Greenfoot.setWorld(gameWorld); // Go to win screen
             }
