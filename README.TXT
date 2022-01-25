@@ -14,3 +14,11 @@ Asset Credits:
 - 16-bit spike (seen in tutorial spike image) by Omniclause: https://omniclause.itch.io/spikes
 	- Spike used in tileset was made manually to fit 8x8 tile
 
+Sorting:
+- You can find the sorting algorithm (MergeSort) in the Utilities class at the bottom
+- Actual call for the method is in the Scores world subclass
+
+Scores:
+- Scores should save on reset as long as code is not modified
+- Scores delete when GreenFoot is closed
+
