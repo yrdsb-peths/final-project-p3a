@@ -50,35 +50,35 @@ public class Scores extends World
             }
             if (i == 1)
             {
-                topScore.setValue(scoreDisplayed);
+                topScore.setValue("1. " + scoreDisplayed);
             }
             else if (i == 2)
             {
-                secondScore.setValue(scoreDisplayed);
+                secondScore.setValue("2. " + scoreDisplayed);
             }
             else if (i == 3)
             {
-                thirdScore.setValue(scoreDisplayed);
+                thirdScore.setValue("3. " + scoreDisplayed);
             }
             else if (i == 4)
             {
-                fourthScore.setValue(scoreDisplayed);
+                fourthScore.setValue("4. " + scoreDisplayed);
             }
             else if (i == 5)
             {
-                fifthScore.setValue(scoreDisplayed);
+                fifthScore.setValue("5. " + scoreDisplayed);
             }
             else if (i == 6)
             {
-                sixthScore.setValue(scoreDisplayed);
+                sixthScore.setValue("6. " + scoreDisplayed);
             }
             else if (i == 7)
             {
-                seventhScore.setValue(scoreDisplayed);
+                seventhScore.setValue("7. " + scoreDisplayed);
             }
             else if (i == 8)
             {
-                eighthScore.setValue(scoreDisplayed);
+                eighthScore.setValue("8. " + scoreDisplayed);
             }
         }
     }
