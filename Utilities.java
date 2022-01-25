@@ -21,49 +21,59 @@ public class Utilities
     {
         pc.getWorld().addObject(new ScoreCount(pc), 384*3 - ((144/5)*2), 68);
     }
-    // MergeSort will sort from lowest -> greatest
     public static void mergeSort(ArrayList<Integer> arr)
     {
         int[] tempArr = new int[arr.size()];
-        mergeSort(arr, tempArr, 0, arr.size()-1);
+        mergeSortHelper(arr, 0, arr.size() - 1, tempArr);
     }
-    public static void mergeSort(ArrayList<Integer> arr, int[] tempArr, int low, int high)
+    private static void mergeSortHelper(ArrayList<Integer> arr, int from, int to, int[] tempArr)
     {
-        if (low >= high)
+        if (to - from >= 1)
         {
-            return;
+            int mid = (from + to) / 2;
+            mergeSortHelper(arr, from, mid, tempArr);
+            mergeSortHelper(arr, mid + 1, to, tempArr);
+            merge(arr, from, mid, to, tempArr);
         }
-        int mid = (low + high)/2;
-        mergeSort(arr, tempArr, low, mid);
-        mergeSort(arr, tempArr, mid + 1, high);
-        merge(arr, tempArr, low, mid, high);
     }
-    public static void merge(ArrayList<Integer> arr, int[] tempArr, int low, int mid, int high)
+    private static void merge(ArrayList<Integer> arr, int from, int mid, int to, int[] tempArr)
     {
-        for (int i = low; i <= high; i++)
+        int i = from;
+        int j = mid + 1;
+        int k = from;
+        
+        while (i <= mid && j <= to)
         {
-            tempArr[i] = arr.get(i);
-        }
-        int j = low;
-        int k = mid + 1;
-        for (int i = low; i <= high; i++)
-        {
-            if (j > mid)
+            if (arr.get(i) < arr.get(j))
             {
-                arr.set(i, tempArr[k++]);
-            }
-            else if (k > high)
-            {
-                arr.set(i, tempArr[low++]);
-            }
-            else if (tempArr[k] < tempArr[j])
-            {
-                arr.set(i, tempArr[k++]);
+                tempArr[k] = arr.get(i);
+                i++;
             }
             else
             {
-                arr.set(i, tempArr[low++]);
+                tempArr[k] = arr.get(j);
+                j++;
             }
+            k++;
+        }
+        
+        while (i<= mid)
+        {
+            tempArr[k] = arr.get(i);
+            i++;
+            k++;
+        }
+        
+        while (j <= to)
+        {
+            tempArr[k] = arr.get(j);
+            j++;
+            k++;
+        }
+        
+        for (k = from; k<= to; k++)
+        {
+            arr.set(k, tempArr[k]);
         }
     }
 }

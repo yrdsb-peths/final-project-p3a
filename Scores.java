@@ -37,6 +37,10 @@ public class Scores extends World
         GreenfootImage bg = new GreenfootImage("Scores.png");
         bg.scale(384*3, 192*3);
         setBackground(bg);
+        for (int i = 0; i < scores.size(); i++)
+        {
+            System.out.println(scores.get(i));
+        }
         for (int i = 1; i <= 8; i++)
         {
             String scoreDisplayed = "";
