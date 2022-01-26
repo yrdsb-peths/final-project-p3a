@@ -1,13 +1,14 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.ArrayList;
 /**
- * Write a description of class Scores here.
+ * Where scores are stored and displayed
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Isaac, Kenneth
+ * @version 1
  */
 public class Scores extends World
 {
+    // variable declaration
     private static ArrayList<Integer> scores = new ArrayList<Integer>();
     private Label scoreLabel;
     private Label topScore;
@@ -16,8 +17,10 @@ public class Scores extends World
     private Label fourthScore;
     private Label fifthScore;
     public Scores()
-    {    
+    {   
+        // Create a new world with 384*3x193*3 cells with a cell size of 1x1 pixels.
         super(384*3, 192*3, 1); 
+        
         Label topScore = new Label(0, 50);
         Label secondScore = new Label(0, 50);
         Label thirdScore = new Label(0, 50);
@@ -26,6 +29,7 @@ public class Scores extends World
         Label sixthScore = new Label(0, 50);
         Label seventhScore = new Label(0, 50);
         Label eighthScore = new Label(0, 50);
+        
         addObject(topScore, 7*24, 10*24);
         addObject(secondScore, 7*24, 13*24);
         addObject(thirdScore, 7*24, 16*24);
@@ -34,9 +38,13 @@ public class Scores extends World
         addObject(sixthScore, 27*24, 13*24);
         addObject(seventhScore, 27*24, 16*24);
         addObject(eighthScore, 27*24, 19*24);
+        
+        //sets background
         GreenfootImage bg = new GreenfootImage("Scores.png");
         bg.scale(384*3, 192*3);
         setBackground(bg);
+        
+        //displays scores
         for (int i = 1; i <= 8; i++)
         {
             String scoreDisplayed = "";
@@ -82,12 +90,10 @@ public class Scores extends World
             }
         }
     }
+    //sorts scores using recursive sort method (merge sort)
     public static void registerScore(int score)
     {
         scores.add(score);
         Utilities.mergeSort(scores);
-    }
-    public void act()
-    {
     }
 }

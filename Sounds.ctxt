@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Sounds
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Sounds\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Write\ a\ description\ of\ class\ Sounds\ here.\r\n\ \r\n\ @author\ Isaac,\ Kenneth\ \r\n\ @version\ 1\r\n
 comment1.params=fileName
 comment1.target=void\ playSound(java.lang.String)
 comment2.params=fileName

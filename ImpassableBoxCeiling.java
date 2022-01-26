@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class ImpassableBox here.
+ * Creates a ceiling so player cannot jump through something
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Isaac, Kenneth
+ * @version 1
  */
 public class ImpassableBoxCeiling extends Actor
 {
@@ -16,7 +16,7 @@ public class ImpassableBoxCeiling extends Actor
         setImage(boundingBox);
         
         //code to see the bounding boxes
-        boundingBox.setColor(new Color(0, 0, 255)); 
+        //boundingBox.setColor(new Color(0, 0, 255)); 
         //boundingBox.fill();
     }
 }

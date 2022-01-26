@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class NextLevel here.
+ * Creates a box that goes to the next level if touched
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Isaac, Kenneth
+ * @version 1
  */
 public class NextLevel extends Actor
 {
@@ -16,7 +16,7 @@ public class NextLevel extends Actor
         setImage(nextLevel);
         
         //code to see the bounding boxes
-        nextLevel.setColor(new Color(255, 255, 182)); 
-        nextLevel.fill();
+        //nextLevel.setColor(new Color(255, 255, 182)); 
+        //nextLevel.fill();
     }
 }

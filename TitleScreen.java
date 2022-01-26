@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class MyWorld here.
+ * The title screen of the game
  * 
  * @author Isaac, Kenneth 
- * @version (a version number or a date)
+ * @version 1
  */
 public class TitleScreen extends World
 {
@@ -13,8 +13,11 @@ public class TitleScreen extends World
      * 
      */
     public TitleScreen()
-    {    
+    {   
+        // Create a new world with 384*3x193*3 cells with a cell size of 1x1 pixels.
         super(384*3, 192*3, 1);
+        
+        //sets background
         GreenfootImage bg = new GreenfootImage("TitleScreen.png");
         bg.scale(384*3, 192*3);
         setBackground(bg);
@@ -35,9 +38,11 @@ public class TitleScreen extends World
     }
     public void started()
     {
+        //starts music
         Sounds.setBGM("BGM.mp3");
     }
     public void act(){
+        //proceeds with game if spacebar is pressed
         if (Greenfoot.isKeyDown("space")){
             Tutorial curWorld = new Tutorial();
             Greenfoot.setWorld(curWorld);

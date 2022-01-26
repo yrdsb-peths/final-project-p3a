@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Lives here.
+ * Manages display of player health and manages player health
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Isaac, Kenneth
+ * @version 1
  */
 
 public class Lives extends Actor
@@ -16,6 +16,8 @@ public class Lives extends Actor
      public static final int resizeY = 25*2;
      // Class that handles the display of the player's health
      // Also doubles to manage player's health
+     
+     
      public Lives(boolean filled)
      {
          this.filled = filled;

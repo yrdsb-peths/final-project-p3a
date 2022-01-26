@@ -1,10 +1,11 @@
 import java.util.*;
 import java.io.*;
 /**
- * Write a description of class Scanner here.
+ * Reads the a text file based off of parameter, puts the contents of text file
+ * into an array
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Isaac, Kenneth
+ * @version 1
  */
 public class MapReader
 {

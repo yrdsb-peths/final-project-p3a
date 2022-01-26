@@ -1,10 +1,11 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class HitboxVisualizer here.
+ * Creates a hitbox for the player that handles collision with collectables 
+ * and spikes
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Isaac, Kenneth
+ * @version 1
  */
 public class HitboxVisualizer extends Actor
 {
@@ -17,12 +18,15 @@ public class HitboxVisualizer extends Actor
         GreenfootImage boundingBox = new GreenfootImage((int)(24*1.18), (int)(30*1.38));
         setImage(boundingBox);
         
-        boundingBox.setColor(new Color(128, 128, 128));
-        boundingBox.setTransparency(80);
+        //code to see bounding 
+        //boundingBox.setColor(new Color(128, 128, 128));
+        //boundingBox.setTransparency(80);
         //boundingBox.fill();
     }
     private void checkCollision()
     {
+        //adds a life to player, or adds points if full hp, removes heart from
+        //world if touched
         if(isTouching(Heart.class))
         {
             Sounds.playSound("GetHeart.mp3");
@@ -30,12 +34,15 @@ public class HitboxVisualizer extends Actor
             Heart touched = (Heart)getOneIntersectingObject(Heart.class);
             getWorld().removeObject(touched);
         }
+        //removes a life from the player and moves them back to the start of
+        //the level
         else if(isTouching(Spike.class))
         {
             Sounds.playSound("PlayerHit.mp3");
             pc.updateHP(false);
             pc.setLocation(pc.spawn[0], pc.spawn[1] - 24);
         }
+        //adds points to player score and removes chest upon being touched
         else if(isTouching(Chest.class))
         {
             Sounds.playSound("GetChest.mp3");
@@ -43,6 +50,7 @@ public class HitboxVisualizer extends Actor
             Chest touched = (Chest)getOneIntersectingObject(Chest.class);
             getWorld().removeObject(touched);
         }
+        //adds points to player score and removes coin upong being touched
         else if(isTouching(Coin.class))
         {
             Sounds.playSound("GetCoin.mp3");

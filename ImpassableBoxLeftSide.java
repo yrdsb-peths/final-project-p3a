@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class ImpassableBoxSide here.
+ * Creates a left wall so a player cannot continue walking right
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Isaac, Kenneth
+ * @version 1
  */
 public class ImpassableBoxLeftSide extends Actor
 {
@@ -16,7 +16,7 @@ public class ImpassableBoxLeftSide extends Actor
         setImage(boundingBox);
         
         //code to see the bounding boxes
-        boundingBox.setColor(new Color(0, 255, 0)); 
+        //boundingBox.setColor(new Color(0, 255, 0)); 
         //boundingBox.fill();
     }
 }

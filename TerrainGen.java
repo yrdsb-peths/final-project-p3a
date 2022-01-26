@@ -1,14 +1,16 @@
 import greenfoot.*;
 /**
- * Write a description of class TerrainGen here.
+ * Generates the map with walls, collectables and dangers based off a text file
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Isaac, Kenneth
+ * @version 1
  */
 public class TerrainGen extends Actor 
 {
     // Array to hold the possible locations (tiles) of a collidable actor
     // There are 1152 possible locations, 48 tiles x 24 tiles
+    // Make a new array for each possible collidable actor as they can be in any
+    // Position of the 1152 tiles
     private static ImpassableBoxLeftSide impassableBoxLeftSideArray[] = new ImpassableBoxLeftSide[1152];
     private static ImpassableBoxRightSide impassableBoxRightSideArray[] = new ImpassableBoxRightSide[1152];
     private static ImpassableBoxFloor impassableBoxFloorArray[] = new ImpassableBoxFloor[1152];
@@ -21,7 +23,9 @@ public class TerrainGen extends Actor
     private static Spike[] spikeArr = new Spike[1152];
     private int tileSize = 24; // Tiles are 24 x 24 pixels
     private int drawnTileSize = 20; //Drawn tiles are 20 x 20 pixels to prevent overlapping tiles
+    //Platforms are 12 x 11 pixels, filled in to prevent falling through the platform
     private int platformTileSize = 12;
+    private int platformTileWidth = 11;
     private int cols = 48; // The map is 48 tiles wide
     private int offset = tileSize/2; // Greenfoot drawing offset
     private int floorSideWidth = 1;
@@ -51,12 +55,12 @@ public class TerrainGen extends Actor
                 pc.getWorld().addObject(impassableBoxCeilingArray[i], i % cols * tileSize + offset,(int)Math.floor(i/cols) * tileSize + offset*2);
             }
             if(map[i] == 2){ // Platform collision
-                impassableBoxFloorArray[i] = new ImpassableBoxFloor(platformTileSize,floorSideWidth+10);
+                impassableBoxFloorArray[i] = new ImpassableBoxFloor(platformTileSize,platformTileWidth);
                 impassableBoxCeilingArray[i] = new ImpassableBoxCeiling(platformTileSize,floorSideWidth);
                 pc.getWorld().addObject(impassableBoxFloorArray[i], i % cols * tileSize + offset,(int)Math.floor(i/cols) * tileSize);
                 pc.getWorld().addObject(impassableBoxCeilingArray[i], i % cols * tileSize + offset,(int)Math.floor(i/cols) * tileSize + 6);
             }
-            if(map[i] == 3){ // Void
+            if(map[i] == 3){ // Void/ Lava
                 emptyVoidArray[i] = new EmptyVoid(tileSize,floorSideWidth);
                 pc.getWorld().addObject(emptyVoidArray[i], i % cols * tileSize + offset, (int)Math.floor(i/cols) * tileSize + offset);
             }

@@ -1,10 +1,8 @@
 #BlueJ class context
 comment0.target=Scores
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Scores\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\r\n\ Where\ scores\ are\ stored\ and\ displayed\r\n\ \r\n\ @author\ Isaac,\ Kenneth\r\n\ @version\ 1\r\n
 comment1.params=
 comment1.target=Scores()
 comment2.params=score
 comment2.target=void\ registerScore(int)
-comment3.params=
-comment3.target=void\ act()
-numComments=4
+numComments=3

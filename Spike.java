@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Spike here.
+ * Creates a spike hitbox
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Isaac, Kenneth
+ * @version 1
  */
 public class Spike extends Actor
 {
@@ -14,8 +14,9 @@ public class Spike extends Actor
         GreenfootImage boundingBox = new GreenfootImage(21, 18);
         setImage(boundingBox);
         
-        boundingBox.setColor(new Color(128, 128, 128));
-        boundingBox.setTransparency(80);
+        //code to see hitbox
+        //boundingBox.setColor(new Color(128, 128, 128));
+        //boundingBox.setTransparency(80);
         //boundingBox.fill();
     }
 }

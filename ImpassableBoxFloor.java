@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class ImpassableBoxFloor here.
+ * Creates a floor so player cannot fall through something
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Isaac, Kenneth
+ * @version 1
  */
 public class ImpassableBoxFloor extends Actor
 {
@@ -16,7 +16,7 @@ public class ImpassableBoxFloor extends Actor
         setImage(boundingBox);
         
         //code to see the bounding boxes
-        boundingBox.setColor(new Color(255, 0, 0)); 
+        //boundingBox.setColor(new Color(255, 0, 0)); 
         //boundingBox.fill();
     }
 }

@@ -2,8 +2,8 @@ import greenfoot.GreenfootSound;
 /**
  * Write a description of class Sounds here.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Isaac, Kenneth 
+ * @version 1
  */
 public class Sounds  
 {

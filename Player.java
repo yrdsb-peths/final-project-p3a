@@ -1,7 +1,8 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Player here.
+ * Handles the player. Has player movement, collision against walls, player
+ * animation, moving worlds, hp and score
  * 
  * @author (your name) 
  * @version (a version number or a date)
@@ -23,13 +24,13 @@ public class Player extends Actor
     private double jumpDecel = 0.75;
     private double jumpDecelTimer = 0;
     private int JUMP_HEIGHT = 100;
+    private double amountJumped;
     private double amountFallen = 0;
     private int maxHoriVelocity = 2;
     private int horiSpeed = 1; //possible to change to make player move faster, possible powerup
+    private double tempHoriSpeed;
     private int x;
     private int y;
-    private double amountJumped;
-    private double tempHoriSpeed;
     private boolean wPressed;
     private boolean aPressed;
     private boolean dPressed;
@@ -50,6 +51,7 @@ public class Player extends Actor
     private GreenfootImage[][] walk = new GreenfootImage[2][6];
     private GreenfootImage[][] jump = new GreenfootImage[2][4];
     private GreenfootImage[][] fall = new GreenfootImage[2][2];
+    
     public Player(String curWorld)
     {
         this.curWorld = curWorld;
@@ -95,25 +97,31 @@ public class Player extends Actor
      * Act - do whatever the Player wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    
+    //moves the player based on any x,y changes given by movement
     private void move(int x,int y){
         setLocation(getX()+x, getY()+y);
     }
+    
+    //handles the left and right movement
     private void leftRight(boolean aPressed, boolean dPressed){
+        //slowly increases speed as you hold 'A' or 'D'
         if (tempHoriSpeed <= maxHoriVelocity){
             tempHoriSpeed += 0.1;
         }
-        if (aPressed == true && dPressed == true){
+        //if 'A' and 'D' are pressed at the same time, reset speed
+        if (aPressed && dPressed){
             tempHoriSpeed = horiSpeed;
         } else {
-            if(aPressed == true){
+            //if 'A' pressed, subtract from x value
+            if(aPressed){
                 if(isTouching(ImpassableBoxRightSide.class)){
                     
                 } else {
                     x -= tempHoriSpeed;
                 }
             }
-            if(dPressed == true){
+            //if 'D' pressed, add to x value
+            if(dPressed){
                 if(isTouching(ImpassableBoxLeftSide.class)){
                     
                 } else {
@@ -122,16 +130,58 @@ public class Player extends Actor
             }
         }
     }
+    
+    private void jump(){ 
+        if (!isJumping){
+            amountJumped = 0;
+            tempJumpSpeed = jumpSpeed;
+            isJumping = true;           
+        } else if (!isFalling){
+            if (tempJumpSpeed <= 0){           
+                isFalling = true;
+                isJumping = false;              
+                amountFallen = 0;
+                amountJumped = 0;
+                wPressed = false;
+                jumpDecelTimer = 0;
+            } else {    
+                y -= tempJumpSpeed;
+                amountJumped += tempJumpSpeed;
+                if (isTouching(ImpassableBoxCeiling.class))
+                {
+                    tempJumpSpeed = 0;
+                }
+                else if (jumpDecelTimer % 2 == 0)
+                {
+                    tempJumpSpeed -= jumpDecel;
+                }
+                jumpDecelTimer += 1;
+            }
+        } else if (wPressed == false && isJumping == true && isFalling == false){
+            isFalling = true;
+            amountFallen = 0;
+            amountJumped = 0;
+        }
+    }
+    
+    //handles the player falling 
     private void fall(){
+        //slowly ramps up how fast they fall
         if ((amountFallen += GRAVITY) != MAX_VERT_VELOCITY){
             amountFallen = (amountFallen + GRAVITY);
         }
+        
         y += amountFallen;
     }
+    
+    //handles movement and collision
     private void movementCollision()
     {
+        //resets x,y changes 
         x= 0;
         y= 0;
+        
+        //detects which keys are pressed
         if(Greenfoot.isKeyDown("w") && !isFalling){
             wPressed = true;
         }
@@ -148,62 +198,49 @@ public class Player extends Actor
             dPressed = false;
         }
         if(wPressed){
-            if (!isJumping){
-                amountJumped = 0;
-                tempJumpSpeed = jumpSpeed;
-                isJumping = true;
-            } else if (!isFalling){
-                if (tempJumpSpeed <= 0){
-                    isFalling = true;
-                    isJumping = false;
-                    amountFallen = 0;
-                    amountJumped = 0;
-                    wPressed = false;
-                    jumpDecelTimer = 0;
-                } else {
-                    y -= tempJumpSpeed;
-                    amountJumped += tempJumpSpeed;
-                    if (isTouching(ImpassableBoxCeiling.class))
-                    {
-                        tempJumpSpeed = 0;
-                    }
-                    else if (jumpDecelTimer % 2 == 0)
-                    {
-                        tempJumpSpeed -= jumpDecel;
-                    }
-                    jumpDecelTimer += 1;
-                }
-            }
-        } else if (wPressed == false && isJumping == true && isFalling == false){
-            isFalling = true;
-            amountFallen = 0;
-            amountJumped = 0;
+            jump();
         }
+        
+        //calls leftRight method to move player left or right 
         if(aPressed == true || dPressed == true){
             leftRight(aPressed, dPressed);
         }else{
+            //resets the velocity if neither 'A' or 'D' is pressed
             tempHoriSpeed = horiSpeed;
         }
+        
+        //pushes player out of ground incase they clip into the floor
         if (isTouching(ImpassableBoxFloor.class) && (isTouching(ImpassableBoxLeftSide.class) || isTouching(ImpassableBoxRightSide.class))){
             y-= 1;
         }
+        
+        //will make you fall if you are in the air and not jumping
         if (!(isTouching(ImpassableBoxFloor.class)) && isJumping == false && !(isTouching(ImpassableBoxLeftSide.class) || isTouching(ImpassableBoxRightSide.class)) && isFalling == false){
             amountFallen = 0;
             isFalling = true;
         }
+        
         if (isFalling == true){
             fall();
         }
+               
         move(x,y);
+        
+        //resets jump if touching the floor
         if (!isTouching(ImpassableBoxCeiling.class)){
             if (isTouching(ImpassableBoxFloor.class) && isFalling == true){
                 isJumping = false;
                 isFalling = false;
             }
         }
+        
+        //incase player is stuck inbetween a ceiling and floor, it will 
+        //push the player out
         if (isTouching(ImpassableBoxCeiling.class) && isTouching(ImpassableBoxFloor.class)){
             y += 1;
         }
+        
+        //resets position of player and takes one life from the player
         if(isTouching(EmptyVoid.class)){
             y = 0; // Reset velocities
             x = 0;
@@ -211,16 +248,21 @@ public class Player extends Actor
             updateHP(false);
             setLocation(spawn[0], spawn[1] - 24); // Reset to spawn; -24 offset on y to prevent clipping
         }
+        
+        //makes you lose if you run out of lives
         if(!lives[lives.length-1].getFilled())
         {
             Lose gameWorld = new Lose();
             Greenfoot.setWorld(gameWorld);
         }
+        
+        //sends you to next world
         if(isTouching(NextLevel.class)){
             nextWorld(curWorld);
         }
     }
     
+    //handles all the world changing
     public void nextWorld(String curWorld){
         // If the Player object is touching any object of the NextLevelBox class
         if(isTouching(NextLevel.class)){
@@ -252,11 +294,8 @@ public class Player extends Actor
             }
         }
     }
-    public void gameOver(){
-        Scores.registerScore(score);
-        Scores gameWorld = new Scores();
-        Greenfoot.setWorld(gameWorld);
-    }
+    
+    
     private void animationState()
     {
         // If moving left previously, but now moving right
@@ -378,6 +417,7 @@ public class Player extends Actor
         lastFrameDir = frameDir;
         frameDir = newDir;
     }
+    
     public void act(){
         animationState();
         movementCollision();
