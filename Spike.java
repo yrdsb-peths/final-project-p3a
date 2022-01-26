@@ -16,6 +16,6 @@ public class Spike extends Actor
         
         boundingBox.setColor(new Color(128, 128, 128));
         boundingBox.setTransparency(80);
-        boundingBox.fill();
+        //boundingBox.fill();
     }
 }

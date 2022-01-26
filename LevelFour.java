@@ -22,7 +22,7 @@ public class LevelFour extends World
         setBackground(bg);
         
         Player player = new Player("LevelFour");
-        addObject(player, 48, 312);
+        addObject(player, 48, 240);
         
         HitboxVisualizer hitbox = new HitboxVisualizer(player);
         addObject(hitbox, 0, 0);

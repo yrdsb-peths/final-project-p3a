@@ -20,10 +20,11 @@ public class Lose extends World
         GreenfootImage bg = new GreenfootImage("Lose.png");
         bg.scale(384*3, 192*3);
         setBackground(bg);
-        
+        Sounds.stopBGM("BGM.mp3");
     }
     public void act()
     {
+        Sounds.setBGM("Lose.mp3");
         if (Greenfoot.isKeyDown("y"))
         {
             Scores.registerScore(Player.score);

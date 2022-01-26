@@ -16,6 +16,6 @@ public class EmptyVoid extends Actor
         
         //code to see the bounding boxes
         emptyVoid.setColor(new Color(150, 60, 255)); 
-        emptyVoid.fill();
+        //emptyVoid.fill();
     }
 }

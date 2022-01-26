@@ -19,29 +19,33 @@ public class HitboxVisualizer extends Actor
         
         boundingBox.setColor(new Color(128, 128, 128));
         boundingBox.setTransparency(80);
-        boundingBox.fill();
+        //boundingBox.fill();
     }
     private void checkCollision()
     {
         if(isTouching(Heart.class))
         {
+            Sounds.playSound("GetHeart.mp3");
             pc.updateHP(true);
             Heart touched = (Heart)getOneIntersectingObject(Heart.class);
             getWorld().removeObject(touched);
         }
         else if(isTouching(Spike.class))
         {
+            Sounds.playSound("PlayerHit.mp3");
             pc.updateHP(false);
             pc.setLocation(pc.spawn[0], pc.spawn[1] - 24);
         }
         else if(isTouching(Chest.class))
         {
+            Sounds.playSound("GetChest.mp3");
             pc.updateScore("Chest");
             Chest touched = (Chest)getOneIntersectingObject(Chest.class);
             getWorld().removeObject(touched);
         }
         else if(isTouching(Coin.class))
         {
+            Sounds.playSound("GetCoin.mp3");
             pc.updateScore("Coin");
             Coin touched = (Coin)getOneIntersectingObject(Coin.class);
             getWorld().removeObject(touched);

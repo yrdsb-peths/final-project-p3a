@@ -207,6 +207,7 @@ public class Player extends Actor
         if(isTouching(EmptyVoid.class)){
             y = 0; // Reset velocities
             x = 0;
+            Sounds.playSound("Void.mp3");
             updateHP(false);
             setLocation(spawn[0], spawn[1] - 24); // Reset to spawn; -24 offset on y to prevent clipping
         }
@@ -223,6 +224,7 @@ public class Player extends Actor
     public void nextWorld(String curWorld){
         // If the Player object is touching any object of the NextLevelBox class
         if(isTouching(NextLevel.class)){
+            Sounds.playSound("NextLevel.mp3");
             if(curWorld.equals("Tutorial")){ // If on tutorial
                 spawn[0] = 48; // Sets spawn x
                 spawn[1] = 504; // Sets spawn y
@@ -239,8 +241,8 @@ public class Player extends Actor
                 LevelThree gameWorld= new LevelThree();
                 Greenfoot.setWorld(gameWorld); // Go to level one
             } else if (curWorld.equals("LevelThree")){
-                // spawn[0] = ; // Set spawn for level four here
-                // spawn[1] = ;
+                spawn[0] = 48;
+                spawn[1] = 240;
                 LevelFour gameWorld = new LevelFour();
                 Greenfoot.setWorld(gameWorld); // Go to level four
             } else if (curWorld.equals("LevelFour"))

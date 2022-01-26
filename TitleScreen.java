@@ -31,6 +31,8 @@ public class TitleScreen extends World
         {
             Player.lives[i].updateStatus(true);
         }
+        Sounds.stopBGM("Lose.mp3");
+        Sounds.stopBGM("Win.mp3");
         Player.score = 0;
     }
     public void act(){
@@ -38,5 +40,6 @@ public class TitleScreen extends World
             Tutorial curWorld = new Tutorial();
             Greenfoot.setWorld(curWorld);
         }
+        Sounds.setBGM("BGM.mp3");
     }
 }
