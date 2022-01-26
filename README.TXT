@@ -33,3 +33,6 @@ Sidenote:
 	- Disable music in Win/Lose screens and in TitleScreen
 	- This a known issue with Greenfoot's sound file decoders
 
+- Game would have been better compressed if mp3s actually worked with Greenfoot
+	- .wav works much better and has fewer errors
+
