@@ -35,11 +35,14 @@ public class TitleScreen extends World
         Sounds.stopBGM("Win.mp3");
         Player.score = 0;
     }
+    public void started()
+    {
+        Sounds.setBGM("BGM.mp3");
+    }
     public void act(){
         if (Greenfoot.isKeyDown("space")){
             Tutorial curWorld = new Tutorial();
             Greenfoot.setWorld(curWorld);
         }
-        Sounds.setBGM("BGM.mp3");
     }
 }

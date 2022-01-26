@@ -7,9 +7,9 @@ import greenfoot.GreenfootSound;
  */
 public class Sounds  
 {
-    private static GreenfootSound backgroundMusic = new GreenfootSound("BGM.mp3");
-    private static GreenfootSound loseMusic = new GreenfootSound("Lose.mp3");
-    private static GreenfootSound winMusic = new GreenfootSound("Win.mp3");
+    private static GreenfootSound backgroundMusic = new GreenfootSound("BGM.wav");
+    private static GreenfootSound loseMusic = new GreenfootSound("Lose.wav");
+    private static GreenfootSound winMusic = new GreenfootSound("Win.wav");
     
     public static void playSound(String fileName)
     {
@@ -39,7 +39,7 @@ public class Sounds
     {
         if (fileName.equals("BGM.mp3"))
         {
-            backgroundMusic.stop();
+            backgroundMusic.pause();
         }
         else if (fileName.equals("Lose.mp3"))
         {
