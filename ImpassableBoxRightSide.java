@@ -8,6 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class ImpassableBoxRightSide extends Actor
 {
+    // Right side wall class so player cannot walk through right side of something
     public ImpassableBoxRightSide(int width, int height)
     {
         // Creates an invisible box

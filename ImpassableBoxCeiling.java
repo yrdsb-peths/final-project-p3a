@@ -8,6 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class ImpassableBoxCeiling extends Actor
 {
+    // Ceiling class so player cannot jump through something
     public ImpassableBoxCeiling(int width, int height)
     {
         // Creates an invisible box

@@ -20,7 +20,6 @@ public class LevelTwo extends World
      */
     public LevelTwo()
     {
-        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(384*3, 192*3, 1);
         GreenfootImage bg = new GreenfootImage("leveltwo.png");
         bg.scale(384*3, 192*3);

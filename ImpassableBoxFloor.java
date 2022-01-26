@@ -8,6 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class ImpassableBoxFloor extends Actor
 {
+    // Floor class so player does not fall through something
     public ImpassableBoxFloor(int width, int height)
     {
         // Creates an invisible box

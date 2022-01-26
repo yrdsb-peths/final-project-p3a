@@ -8,6 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class NextLevel extends Actor
 {
+    // Class to handle collision for transition to next area
     public NextLevel(int width, int height)
     {
         // Creates an invisible box

@@ -8,6 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class EmptyVoid extends Actor
 {
+    // Class to create void that will damage player
     public EmptyVoid(int width, int height)
     {
         // Creates an invisible box
