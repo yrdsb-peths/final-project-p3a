@@ -24,30 +24,31 @@ public class Play extends Actor
     }
     public void act()
     {
+        // If 1/10 of second has passed
         if (fadeTimer.millisElapsed() >= 100)
         {
-            if (fadeOut)
+            if (fadeOut) // if currently fading out play button
             {
-                transparency -= 51;
-                if (play.getTransparency() <= 0)
+                transparency -= 51; // make more transparent
+                if (play.getTransparency() <= 0) // if not 0
                 {
-                    transparency = 0;
+                    transparency = 0; // Set to prevent negative
                     fadeOut = false;
-                    fadeIn = true;
+                    fadeIn = true; // start fading in play button
                 }
             }
             else if (fadeIn)
             {
-                transparency += 51;
+                transparency += 51; // increase transparency
                 if (play.getTransparency() >= 255)
                 {
-                    transparency = 255;
-                    fadeOut = true;
-                    fadeIn = false;
+                    transparency = 255; // prevent over 255
+                    fadeOut = true; // start fading out play button
+                    fadeIn = false; 
                 }
             }
-            fadeTimer.mark();
-            play.setTransparency(transparency);
+            fadeTimer.mark(); // Reset timer
+            play.setTransparency(transparency); // set transparency
         }
     }
 }

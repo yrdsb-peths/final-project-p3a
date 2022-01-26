@@ -34,10 +34,12 @@ public class Lives extends Actor
              setImage(unfilledContainer);
          }
      }
+     // check if it the life is filled
      public boolean getFilled()
      {
          return filled;
      }
+     // Update the status of the lives image
      public void updateStatus(boolean filled)
      {
          if (filled)

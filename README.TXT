@@ -17,6 +17,7 @@ Asset Credits:
 - Main game BGM by Florian Stracker: https://florianstracker.itch.io/the-heros-path-free-16bit-adventure-game-music
 
 - Win/Lose music from Final Fantasy II
+
 Sorting:
 - You can find the sorting algorithm (MergeSort) in the Utilities class at the bottom
 
@@ -26,4 +27,9 @@ Scores:
 - Scores should save on reset as long as code is not modified
 
 - Scores delete when GreenFoot is closed
+
+Sidenote:
+- If the music ever does not work or causes the game to crash, etc
+	- Disable music in Win/Lose screens and in TitleScreen
+	- This a known issue with Greenfoot's sound file decoders
 

@@ -22,12 +22,12 @@ public class ScoreCount extends Actor
     }
     public void updateScore()
     {
-        score.clear();
-        score.drawString(Integer.toString(pc.score), 72, 25);
+        score.clear(); // used to prevent overlapping label
+        score.drawString(Integer.toString(pc.score), 72, 25); // draw onto screen
         setImage(score);
     }
     public void act()
     {
-        updateScore();
+        updateScore(); // if the score increases, this will update it
     }
 }

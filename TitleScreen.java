@@ -22,6 +22,7 @@ public class TitleScreen extends World
         bg.scale(384*3, 192*3);
         setBackground(bg);
         
+        // The play button
         Play playTag = new Play();
         addObject(playTag, getWidth()/2, (getHeight()/5)*4);
         
@@ -32,7 +33,7 @@ public class TitleScreen extends World
         {
             Player.lives[i].updateStatus(true);
         }
-        Sounds.stopBGM("Lose.mp3");
+        Sounds.stopBGM("Lose.mp3"); // Stop old music
         Sounds.stopBGM("Win.mp3");
         Player.score = 0;
     }
